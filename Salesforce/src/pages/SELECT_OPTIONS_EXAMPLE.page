@@ -1,0 +1,17 @@
+<apex:page controller="SelectOptionsExampleController">
+ <apex:form >
+     <apex:pageBlock >
+      <apex:selectCheckboxes value="{!siblingNames}">
+          <apex:selectOptions value="{!items}"/>
+      </apex:selectCheckboxes>
+      <apex:commandButton action="{!sampleTest}" reRender="pgt" value="Test"/>
+      </apex:pageBlock>
+  </apex:form>
+  <apex:outputPanel id="pgt">
+    <apex:pageBlock rendered="{!size}">
+      <apex:pageBlockTable value="{!SiblingNames}" var="sn" >
+          <apex:column value="{!sn}"/>
+      </apex:pageBlockTable>
+     </apex:pageBlock>
+  </apex:outputPanel>
+</apex:page>

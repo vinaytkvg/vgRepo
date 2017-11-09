@@ -1,0 +1,20 @@
+<apex:page standardController="Department__c" extensions="AccountMessageExtension" docType="html-5.0">
+<apex:sectionHeader title="Department" subtitle="New Department"/>
+    <apex:form >
+        
+     <apex:pageBlock >
+     <center><h5 id="vi" style="color:#D11919">Test Account</h5></center>
+         <apex:pageBlockButtons >
+          <apex:commandButton action="{!Save}" value="Save"></apex:commandButton>
+             <apex:commandButton action="{!edit}" value="Edit"></apex:commandButton>
+             <apex:commandButton action="{!Cancel}" value="cancel"></apex:commandButton>
+         </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Department Information">
+          <apex:inputField value="{!Department__c.Name}" style="disabled:true">
+            </apex:inputField>
+            <apex:inputField value="{!Department__c.Candidate__c}">
+            </apex:inputField>
+        </apex:pageBlockSection>        
+     </apex:pageBlock>
+    </apex:form>
+</apex:page>

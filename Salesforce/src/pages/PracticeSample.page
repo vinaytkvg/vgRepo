@@ -1,0 +1,31 @@
+<apex:page standardController="Account" recordSetVar="accountList" extensions="TestSampleController">
+  <apex:pageBlock id="pb">
+      <apex:pageBlockTable value="{!accList}" var="acc" id="myTable">
+          <apex:column >
+              <input type = "radio" id = "{!acc.Id}" name = "groupradio"/>
+          </apex:column>
+          <apex:column value="{!acc.Name}"/>
+          <apex:column value="{!acc.annualRevenue}"/>
+          <apex:column >
+              <apex:outputText value="{0,date,hh:mm a z}"> <apex:param value="{!acc.LastModifiedDate}"/></apex:outputText>- <apex:outputText value="{0,date,hh:mm a z}"> <apex:param value="{!acc.CreatedDate}"/></apex:outputText>
+          </apex:column>
+      </apex:pageBlockTable>
+      <apex:outputText value="{!ssc.resultSize/ssc.pageSize + 1}"/>
+  </apex:pageBlock>
+  <script>
+      function disableCheckOtherCheckboxes(){
+      debugger;
+      alert(this.id);
+          var table = document.getElementById('{!$Component.pb.myTable}');
+          for(var i = 1; i < table.rows.length; i++)
+          {
+              var cells = table.rows[i].getElementsByTagName("input");
+              
+              if(!cells[0].checked)
+              {
+                  cells[0].disabled = true;
+              }
+          }
+      }
+  </script>
+</apex:page>

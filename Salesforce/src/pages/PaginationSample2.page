@@ -1,0 +1,27 @@
+<apex:page controller="PaginationSample2Controller" doctype="html-5.0">
+<style>
+#pg{
+background-color:yellow;
+text-align:center;
+}
+</style>
+<apex:pageMessages ></apex:pageMessages>
+<apex:form >
+  <apex:pageBlock >
+  <apex:variable value="{!0}" var="sr"/>
+   <apex:pageBlockTable value="{!acc}" var="ac">
+   <apex:column >
+   <apex:variable value="{!sr+1}" var="sr"/>
+     {!sr}
+   </apex:column>
+   <apex:column value="{!ac.name}"/>
+   
+    </apex:pageBlockTable>
+    <apex:panelGrid columns="2" cellpadding="10px"  width="2000px" dir="LTR">
+      <apex:commandLink action="{!previous}" rendered="{!hasPrevious}" id="vin" style="color:yellow;margin-left: 40px;background-color:red;"> Previous </apex:commandLink> 
+           <apex:commandLink action="{!next}" rendered="{!hasNext}" id="gan" style="color:yellow;margin-left: 40px;background-color:red;" > Next </apex:commandLink>
+  </apex:panelGrid>
+   <p id="pg">PAGINATION</p>
+  </apex:pageBlock>
+ </apex:form> 
+</apex:page>

@@ -1,0 +1,48 @@
+<apex:page controller="PaginationSampleController">
+ <apex:form id="f">
+ <style>
+ </style>
+    <apex:pageBlock title="Pagination" id="re">
+    <apex:pageMessages ></apex:pageMessages>
+ 
+    <apex:pageBlockSection id="pbs"  >
+    <apex:panelGrid bgcolor="yellow" columns="3" cellpadding="50" cellspacing="10">
+          <apex:inputText value="{!limitRecords}" >
+              LIMIT: <apex:actionSupport action="{!limitMethod}" reRender="pbs" event="onchange" />
+          </apex:inputText>
+          <apex:inputText value="{!v}" >
+              Enter Page Number :<apex:actionSupport action="{!page1}" event="onchange" reRender="re" />
+          </apex:inputText>
+          <apex:outputText id="oid" >No Of Pages: {!nPages}</apex:outputText>
+          
+ 
+      </apex:panelGrid>
+    </apex:pageBlockSection>
+  
+  
+  <apex:variable value="{!0}" var="sr"/>
+  <apex:pageBlockTable value="{!l}" var="li">
+  <apex:column headerValue="Sr.No"> <apex:variable value="{!sr+1}" var="sr"/> {!sr}</apex:column>
+  <apex:column headerValue="select">
+   <apex:commandLink action="{!linkRecords}" value="link" >
+    <apex:param assignTo="{!linkAcc}" value="{!li.Id}" name="LINK ACC"/>
+    </apex:commandLink>
+  </apex:column>
+  <apex:column value="{!li.name}"/>
+  <apex:column value="{!li.AnnualRevenue}"/>
+  <apex:column value="{!li.AccountNumber}"/>
+  
+  </apex:pageBlockTable>
+ 
+   </apex:pageBlock>
+   <apex:pageBlock id="st">
+   <!--<apex:commandButton value="LINK">
+     <apex:actionSupport action="{!linkRecords}" event="onclick" reRender="se"/>
+   </apex:commandButton>-->
+     <apex:pageBlockTable value="{!acc}" var="ac" id="se">
+      <apex:column value="{!ac.id}"/>
+      <apex:column value="{!ac.name}"/>
+     </apex:pageBlockTable>
+   </apex:pageBlock>
+  </apex:form>
+</apex:page>

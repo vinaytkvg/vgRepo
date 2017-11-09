@@ -1,0 +1,28 @@
+<apex:page docType="html-5.0" standardStylesheets="false">
+
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"/>
+ <c:recorddisplay record="Account" ></c:recorddisplay>
+  <apex:form >
+   <script>
+     function myFun(){
+      //var j$ = jQuery.noConflict();
+      var v =document.getElementById('{!$Component.it}').value;
+      //j$('[id$=ot]').val(v);
+     document.getElementById('{!$Component.ot}').value=v;
+     }
+      
+       function esc(myid) {
+         return '#' + myid.replace(/(:|\.)/g,'\\\\$1');
+       }
+    /*function myFun(textId){
+    
+    document.getElementById(textId).value=document.getElementById('{!$Component.it}').value;
+    }*/
+   </script>
+
+ Enter Country Name : <apex:inputText id="it"></apex:inputText> 
+ Country Code:<apex:inputText id="ot"></apex:inputText> 
+ <input id="ip" onchange="myFun()"></input>
+ <input id="op"></input>
+    </apex:form>
+</apex:page>

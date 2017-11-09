@@ -1,0 +1,14 @@
+<apex:page controller="addvin">
+  <apex:form >
+   <apex:pageBlock id="p" >
+    FIRSTVALUE:<apex:inputText value="{!a}">
+    <apex:actionSupport event="onkeyup" action="{!cadd}" rendered="v"/>
+    </apex:inputText>
+    SECONDVALUE<apex:inputText value="{!b}">
+    <apex:actionSupport event="onkeyup" action="{!cadd}" reRender="v" />
+    </apex:inputText>
+
+    <apex:commandButton value="RESULT:{!cadd}" action="{!save}" reRender="p" id="v"/>
+   </apex:pageBlock>
+   </apex:form>
+</apex:page>

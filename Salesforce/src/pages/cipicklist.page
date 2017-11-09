@@ -1,0 +1,16 @@
+<apex:page controller="picklist">
+ <apex:form >
+  <apex:pageBlock >
+  <apex:pageBlockButtons >
+  <apex:commandButton value="save" action="{!action}" reRender="page"/>
+  </apex:pageBlockButtons>
+    <apex:selectList value="{!dishes}" size="1">
+    <apex:selectOptions value="{!options}"/>
+    <apex:actionSupport event="onchange" reRender="page"/>
+   </apex:selectList>
+     </apex:pageBlock>
+     <apex:pageBlock id="page" >
+      <apex:outputText >picked value : {!dishes} </apex:outputText>
+     </apex:pageBlock>
+ </apex:form>
+</apex:page>

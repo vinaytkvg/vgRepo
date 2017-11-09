@@ -1,0 +1,30 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Salesforce Lightning Design System Trailhead Module</title>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <apex:stylesheet value="{!URLFOR($Resource.SLDSVF212, 'assets/styles/salesforce-lightning-design-system-vf.min.css')}" />
+</head>
+<body>
+  <div class="SLDSVF212">
+      <div class="slds-text-heading--label slds-m-bottom--small">Salesforce Lightning Design System Account Page</div>
+      <!-- PAGE HEADER -->
+          <div class="slds-page-header">
+              <div class="slds-grid slds-wrap">
+                  <div class="slds-col">
+                      <p class="slds-text-heading--labelblue red" >Accounts</p>
+                      <h1 class="slds-page-header__title">My Accounts</h1>
+                  </div>
+                  <div class="slds-col">
+                      <button class="slds-button--brand">New Account</button>
+                  </div>
+              </div>
+          </div>
+      <!-- /PAGE HEADER -->
+  </div>
+</body>
+</html>
+</apex:page>

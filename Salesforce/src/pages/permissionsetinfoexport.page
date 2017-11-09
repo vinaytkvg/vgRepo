@@ -1,0 +1,74 @@
+<apex:page controller="RetrievePermissionSetsMetaData" contentType="application/vnd.ms-excel#{!selectedPermissionSet}MetaData Info.xls">
+                  
+        <apex:pageBlock title="{!selectedPermissionSet} Permission Set">
+             <apex:pageBlockSection title="ApplicationVisibility" collapsible="true" columns="1" rendered="{!applivisible.size!=null && applivisible.size>0}">
+                <apex:pageBlockTable value="{!applivisible}" var="ps">
+                    <apex:column value="{!ps.application}" headerValue="application"/>
+                    <apex:column value="{!ps.visible}" headerValue="visible"/>               
+                </apex:pageBlockTable>
+             </apex:pageBlockSection>
+             <apex:pageBlockSection title="ApexClassAccess" collapsible="true" columns="1" rendered="{!clsaccs.size!=null && clsaccs.size>0}">
+                 <apex:pageBlockTable value="{!clsaccs}" var="ps">
+                    <apex:column value="{!ps.apexClass}" headerValue="apexClass"/>
+                    <apex:column value="{!ps.enabled}" headerValue="enabled"/>               
+                </apex:pageBlockTable>
+             </apex:pageBlockSection>
+             <apex:pageBlockSection title="CustomPermissions" collapsible="true" columns="1" rendered="{!psetcust.size!=null && psetcust.size>0}">
+                  <apex:pageBlockTable value="{!psetcust}" var="ps">
+                    <apex:column value="{!ps.name}" headerValue="name"/>
+                    <apex:column value="{!ps.enabled}" headerValue="enabled"/>               
+                </apex:pageBlockTable>
+             </apex:pageBlockSection>
+             <apex:pageBlockSection title="ExternalDataSourceAccess" collapsible="true" columns="1" rendered="{!persetexdaso.size!=null && persetexdaso.size>0}">
+                  <apex:pageBlockTable value="{!persetexdaso}" var="ps">
+                    <apex:column value="{!ps.externalDataSource}" headerValue="externalDataSource"/>
+                    <apex:column value="{!ps.enabled}" headerValue="enabled"/>               
+                </apex:pageBlockTable>
+             </apex:pageBlockSection>
+             <apex:pageBlockSection title="FieldPermissions" collapsible="true" columns="1" rendered="{!persetfldper.size!=null && persetfldper.size>0}">
+                 <apex:pageBlockTable value="{!persetfldper}" var="ps">
+                  <apex:column value="{!ps.field}" headerValue="Field"/>
+                    <apex:column value="{!ps.editable}" headerValue="editable"/> 
+                    <apex:column value="{!ps.readable}" headerValue="readable "/>              
+                </apex:pageBlockTable>
+             </apex:pageBlockSection>
+             <apex:pageBlockSection title="ObjectPermissions" collapsible="true" columns="1" rendered="{!persetobjper.size!=null && persetobjper.size>0}">
+                  <apex:pageBlockTable value="{!persetobjper}" var="ps">
+                   <!-- <apex:column value="{!ps.object}" headerValue="object"/>-->
+                    <apex:column value="{!ps.allowCreate}" headerValue="allowCreate"/>
+                    <apex:column value="{!ps.allowDelete}" headerValue="allowDelete"/> 
+                    <apex:column value="{!ps.allowEdit}" headerValue="allowEdit"/> 
+                    <apex:column value="{!ps.allowRead}" headerValue="allowRead"/> 
+                    <apex:column value="{!ps.modifyAllRecords}" headerValue="modifyAllRecords"/> 
+                    <apex:column value="{!ps.viewAllRecords}" headerValue="viewAllRecords"/>                
+                </apex:pageBlockTable>
+             </apex:pageBlockSection>
+              <apex:pageBlockSection title="ApexPageAccess" collapsible="true" columns="1" rendered="{!persetapxpg.size!=null && persetapxpg.size>0}">
+                  <apex:pageBlockTable value="{!persetapxpg}" var="ps">
+                    <apex:column value="{!ps.apexPage}" headerValue="apexPage"/>
+                    <apex:column value="{!ps.enabled}" headerValue="enabled"/>               
+                </apex:pageBlockTable>
+             </apex:pageBlockSection>
+             <apex:pageBlockSection title="RecordTypeVisibility" collapsible="true" columns="1" rendered="{!persetrecvis.size!=null && persetrecvis.size>0}">
+                  <apex:pageBlockTable value="{!persetrecvis}" var="ps">
+                    <apex:column value="{!ps.recordType}" headerValue="recordType"/>
+                    <apex:column value="{!ps.visible}" headerValue="visible"/>               
+                </apex:pageBlockTable>
+             </apex:pageBlockSection>
+             <apex:pageBlockSection title="TabVisiblity" collapsible="true" columns="1" rendered="{!persettabset.size!=null && persettabset.size>0}">
+                 <apex:pageBlockTable value="{!persettabset}" var="ps">
+                    <apex:column value="{!ps.tab}" headerValue="tab"/>
+                    <apex:column value="{!ps.visibility}" headerValue="visibility"/>               
+                </apex:pageBlockTable>
+             </apex:pageBlockSection>
+             <apex:pageBlockSection title="UserPermission" collapsible="true" columns="1" rendered="{!persetuper.size!=null && persetuper.size>0}">
+                 <apex:pageBlockTable value="{!persetuper}" var="ps">
+                    <apex:column value="{!ps.name}" headerValue="name"/>
+                    <apex:column value="{!ps.enabled}" headerValue="enabled"/>               
+                </apex:pageBlockTable>
+             </apex:pageBlockSection>
+                       
+             
+        </apex:pageBlock>
+ 
+</apex:page>

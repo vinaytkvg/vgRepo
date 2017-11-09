@@ -1,0 +1,20 @@
+<apex:page controller="supportDemo">
+  <apex:form id="one">
+   <apex:pageBlock >
+    <apex:pageBlockSection >
+     <apex:actionRegion >
+      <apex:pageBlockSectionItem >
+       <apex:outputLabel value=" Enter Name"/>
+       <apex:inputText value="{!name}">
+       <apex:actionSupport event="ondblclick" action="{!show}" reRender="one"/>
+       </apex:inputText>
+      </apex:pageBlockSectionItem>
+     </apex:actionRegion>
+     <apex:pageBlockSectionItem >
+      <apex:outputLabel value="Enter ID"/>
+      <apex:inputText value="{!idN}"/>
+     </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+   </apex:pageBlock>
+  </apex:form>
+</apex:page>

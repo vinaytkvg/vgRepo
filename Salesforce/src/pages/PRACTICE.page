@@ -1,0 +1,27 @@
+<apex:page Controller="AccountCustomController" extensions="PracticeAccCustomExtension" sidebar="false" readOnly="true">
+  <apex:form >
+ <apex:pageBlock tabStyle="Opportunity">
+ <apex:variable value="{!(setcon.pageNumber-1)*setcon.pageSize}" var="sr"/>
+  <apex:pageBlockTable value="{!AccountDetails}" var="ac" id="table">
+   <apex:column headerValue="Sr.No">
+    <apex:variable value="{!sr+1}" var="sr"/>
+    {!sr}.
+   </apex:column>
+   <apex:column value="{!ac.name}"/>
+  </apex:pageBlockTable>
+  <center>
+  <apex:panelGrid columns="14" >
+  <apex:commandButton value="|<" action="{!setCon.first}" disabled="{!!setCon.hasPrevious}" title="First Page"/>
+  <apex:commandButton action="{!setcon.previous}"  value="<" disabled="{!!setcon.hasPrevious}" title="Previous Page"/>
+  <apex:commandButton action="{!setcon.next}"  value=">" disabled="{!!setcon.hasNext}" title="Next Page"/>
+  <apex:commandButton value=">|" action="{!setCon.Last}" disabled="{!!setCon.hasNext}" title="Last Page"/>
+  Total Records :<apex:outputText value="{!setcon.resultSize}"/>
+  Total Pages :<apex:outputText value="{!totalPages}"/>
+  Current Page No. :<apex:outputText value="{!setcon.pageNumber}"/>
+  Remaining Pages :<apex:outputText value="{!totalpages - setcon.pageNumber}"/>
+  Current Page Size :<apex:outputText value="{!recordssize}"/>
+  </apex:panelGrid>
+  </center>
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

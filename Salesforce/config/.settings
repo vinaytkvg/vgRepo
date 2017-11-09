@@ -1,0 +1,22 @@
+{
+    "projectName": "Salesforce",
+    "username": "vinay@ganesh.com",
+    "id": "c621f380-c360-11e7-afe0-4de4f2e167e5",
+    "namespace": "",
+    "orgType": "developer",
+    "loginUrl": "https://login.salesforce.com/",
+    "instanceUrl": "https://tkvg-dev-ed.my.salesforce.com",
+    "workspace": "C:\\MyRepo\\vgRepo",
+    "subscription": [
+        "ApexClass",
+        "ApexComponent",
+        "ApexPage",
+        "ApexTrigger",
+        "Community",
+        "CustomObject",
+        "Flow",
+        "Profile",
+        "StaticResource",
+        "Workflow"
+    ]
+}

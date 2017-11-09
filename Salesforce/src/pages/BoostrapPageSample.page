@@ -1,0 +1,52 @@
+<apex:page id="pg" standardController="Account" showheader="false"  recordSetVar="acc" readOnly="true" standardStylesheets="false">
+  
+    <head>
+     <meta charset="utf-8" />
+     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
+     <apex:stylesheet value="{!URLFOR($Resource.Bootstrap,'bootstrap-3.3.6-dist/css/bootstrap.min.css')}"/>
+    </head>
+     
+     <style type="text/css">
+      [id*=myId] {  box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border: 1px solid #C2C2C2;
+    box-shadow: 1px 1px 4px #EBEBEB;
+    -moz-box-shadow: 1px 1px 4px #EBEBEB;
+    -webkit-box-shadow: 1px 1px 4px #EBEBEB;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    padding: 7px;
+    outline: none;}
+     </style>
+     
+       <div class="container-fluid">
+         <div class="jumbotron">
+           <h2 class="text-center">Account Details</h2>
+         </div>
+         <table class="table table-striped">
+          <thead>
+            <th>Sr.No</th>
+            <th>Account Name</th>
+            <th>Annual Revenue</th>
+          </thead>
+          <tbody>
+          <apex:variable value="{!0}" var="sr"/>
+          <apex:repeat value="{!acc}" var="ac">
+           <tr>
+           <apex:variable value="{!sr+1}" var="sr"/>
+            <td>{!sr}</td>
+            <td>{!ac.name}</td>
+            <td>{!ac.annualrevenue}</td>
+           </tr>
+           </apex:repeat>
+          </tbody>
+         </table>
+       </div>
+     <c:recorddisplay record="Account" fontrcolor="yellow" />
+   <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" />
+   <apex:includeScript value="{!URLFOR($Resource.Bootstrap,'bootstrap-3.3.6-dist/js/bootstrap.min.js')}"/>
+   
+</apex:page>

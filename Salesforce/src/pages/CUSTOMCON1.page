@@ -1,0 +1,22 @@
+<apex:page controller="EMPDEP">
+ <apex:form >
+  <apex:pageBlock title="EMPLOYEE DETAILS">
+  <apex:pageBlockSection >
+  <apex:outputLabel >EmployeeName</apex:outputLabel>
+  <apex:inputText value="{!EmployeeName}"/>
+  <apex:outputLabel >SALARY</apex:outputLabel>
+  <apex:inputText value="{!SALARY}"/>
+ <apex:panelGrid columns="2">
+     <apex:outputText value="DEPARTMENT">  </apex:outputText>
+     <apex:selectList size="3" value="{!picklist}">
+     <apex:selectOption itemLabel="IT" itemValue="IT"></apex:selectOption>
+     <apex:selectOption itemLabel="HR" itemValue="HR"></apex:selectOption>
+     <apex:selectOption itemLabel="ADMIN" itemValue="ADMIN"></apex:selectOption>
+   </apex:selectList>
+</apex:panelGrid>
+<apex:outputLabel value="{!selectlist}"></apex:outputLabel>
+   <apex:commandButton value="save" action="{!SAVE}"/>
+   </apex:pageBlockSection>
+  </apex:pageBlock>
+ </apex:form>
+</apex:page>

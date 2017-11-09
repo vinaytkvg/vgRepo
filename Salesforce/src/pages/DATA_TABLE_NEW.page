@@ -1,0 +1,19 @@
+<apex:page standardController="Account" recordSetVar="acc">
+
+        <apex:dataTable value="{!acc}" var="a" cellspacing="10" cellpadding="10" rules="all" width="50%">
+         <apex:facet name="header" >Account Details</apex:facet>               
+         <apex:facet name="caption"> <u><b>vinay kumar</b></u></apex:facet>
+        
+         <apex:column value=" {!a.Name}">
+            <apex:facet name="header">NAME
+            </apex:facet>
+            <apex:facet name="footer">grand total</apex:facet>
+         </apex:column>
+         <apex:column value="{!a.phone}">
+         <apex:facet name="header">Phone
+         </apex:facet>
+         </apex:column>
+            
+        </apex:dataTable>
+
+</apex:page>

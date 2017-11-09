@@ -1,0 +1,370 @@
+<apex:page controller="MetaDataComponentPageController" readOnly="true">
+    <style>
+        .activeTab {background-color:#1798c1;background-image:none;font-family: Arial black;padding-top: 5px;height: 15px;width:150px;color:white !important;font-size:20px}
+        .inactiveTab {background-color: grey; color:black; background-image:none; font-size: 15px}
+        body .bPageBlock .pbBody .blue .pbSubheader{
+        background-color:#1798c1;
+        font-family:Arial black;
+        font-size:15px;
+        }
+    </style>
+    <apex:actionStatus id="status">
+        <apex:facet name="start">
+            <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+                &nbsp;
+            </div>
+            <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+                <div style="display: inline-block; padding: 5px; background-color: #fff; width: 125px;">
+                    <img src="/img/loading.gif" style="float: left; margin: 8px;"/>
+                    <span style="display: inline-block; padding: 10px 0px;">Loading...</span>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+    <apex:form >
+        <apex:tabPanel switchtype="client" selectedTab="ObjectandFields" id="TheTabPanel" tabClass="activeTab" inactiveTabClass="inactiveTab">
+            <apex:tab label="Object and Fields" name="ObjectandFields" id="tabObjectandField">
+                <apex:pageBlock >
+                    <apex:outputPanel styleClass="blue" layout="block">
+                        <apex:pageblockSection title="Object and Fields Metadata" collapsible="false">       
+                            <apex:selectList value="{!sel}" size="1" label="Select Object" styleClass="objectName" id="selectedObjectId">
+                                <apex:selectOptions value="{!objects}"/>
+                            </apex:selectList>
+                        </apex:pageBlockSection>
+                    </apex:outputPanel>
+                    <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton value="Fetch Object Info" onclick="callObjectExport()" reRender="selectedObjectId"/>
+                    </apex:pageBlockButtons>
+                </apex:pageBlock>
+            </apex:tab>                 
+            <apex:tab label="Profiles" name="ProfileMetadata" id="tabProfile">
+                <apex:pageBlock >
+                    <apex:outputPanel styleClass="blue" layout="block">
+                        <apex:pageblockSection title="Profiles Metadata" collapsible="false">   
+                            <apex:selectList value="{!selectedprofile}" size="1" label="Select Profile" styleClass="profileName" id="profileNames">
+                                <apex:selectOptions value="{!pname}"></apex:selectOptions>
+                            </apex:selectList>
+                        </apex:pageBlockSection>
+                    </apex:outputPanel>
+                    <apex:pageblockButtons location="bottom" >
+                        <apex:commandButton value="Fetch Profiles Info"  onclick="callProfileExport();" reRender="profileNames"/>
+                    </apex:pageblockButtons>        
+                </apex:pageBlock>
+            </apex:tab>
+            <apex:tab label="PermissionSets" name="PermissionSetMetadata" id="tabPermissionSet">
+                <apex:pageBlock >
+                    <apex:outputPanel styleClass="blue" layout="block">
+                        <apex:pageblockSection title="PermissionSet Metadata" collapsible="false">
+                            <apex:selectList value="{!permissionsetlist}" size="1" label="Select Permissionset" styleClass="permissionSetName" id="permissionSetNames">
+                                <apex:selectOptions value="{!psetname}"></apex:selectOptions>
+                            </apex:selectList>
+                        </apex:pageblockSection>
+                    </apex:outputPanel>
+                    <apex:pageBlockButtons location="bottom" >
+                        <apex:commandButton value="Fetch Permissonsets Info" onclick="callPermissionSetExport()" reRender="permissionSetNames"/>
+                    </apex:pageBlockButtons> 
+                </apex:pageBlock>
+            </apex:tab>
+            <apex:tab label="Layouts" name="LayoutMetadata" id="tabLayouts">
+                <apex:pageBlock >
+                    <apex:pageBlockButtons location="top">
+                        <!--<apex:commandButton value="Export" action="{!exportTemplates}"/>-->
+                        <apex:commandLink value="Export" title="Export" action="{!exportLayouts}" target="_blank" styleClass="btn" style="padding:.5%"/>
+                    </apex:pageBlockButtons>
+                    
+                    <apex:outputPanel styleClass="blue" layout="block">
+                        <apex:pageBlockSection title="Layouts MetaData" collapsible="false"/>
+                    </apex:outputPanel>
+                    <div style="padding-bottom:15px">
+                    </div>
+                    <apex:pageBlock id="layoutBlock">     
+                        <apex:dataTable value="{!layoutList}" var="layoutItem" id="flowTable" border="1" cellpadding="10" cellspacing="1">
+                            
+                            <apex:column headerValue="Layout Name">{!layoutItem.fullName}</apex:column>
+                            <apex:column headerValue="Fields Used">
+                                <apex:datatable value="{!layoutItem.layoutSections}" var="laySection">
+                                    <apex:column >
+                                        <apex:datatable value="{!laySection.layoutColumns}" var="layoutColumn">
+                                            <apex:column >
+                                                <apex:repeat value="{!layoutColumn.layoutItems}" var="layoutItem">
+                                                    <apex:outputText value="{!layoutItem.field}"/><br/>
+                                                </apex:repeat>
+                                            </apex:column>
+                                        </apex:dataTable>
+                                    </apex:column>
+                                </apex:datatable>
+                            </apex:column>
+                        </apex:dataTable>
+                        
+                        <apex:pageBlockButtons >
+                            <apex:commandButton value="Next"  action="{!getNextCountLayout}" rerender="layoutBlock" rendered="{!hasNextLayout }" status="status"/>
+                            <apex:commandButton value="Previous" action="{!getPreviousCountLayout}" rerender="layoutBlock" rendered="{!hasPreviousLayout}" status="status"/>
+                        </apex:pageBlockButtons>
+                    </apex:pageblock>
+                </apex:pageBlock>
+            </apex:tab>
+            <apex:tab label="Email Templates" name="EmailTemplates" id="tabEmailTemplate">
+                <apex:pageBlock rendered="{!emailPerRender}" id="emailTemplateId" >
+                    <apex:pageBlockButtons location="top">
+                        <!--<apex:commandButton value="Export" action="{!exportTemplates}"/>-->
+                        <apex:commandLink value="Export" title="Export" action="{!exportTemplates}" target="_blank" styleClass="btn" style="padding:.5%"/>
+                    </apex:pageBlockButtons>
+                    
+                    <apex:outputPanel styleClass="blue" layout="block">
+                        <apex:pageBlockSection title="Email Templates MetaData" collapsible="false"/>
+                    </apex:outputPanel>
+                    <div style="padding-bottom:15px">
+                    </div>
+                    <apex:pageBlock id="emailTemBlock">
+                        <apex:dataTable value="{!emailTempResult}" var="etemp" id="EmailTemplateTable" border="1" cellpadding="10" cellspacing="1">
+                            <apex:column headerValue="Name" value="{!etemp.name}"/>
+                            <apex:column headerValue="Subject" value="{!etemp.Subject}"/>
+                            <apex:column headerValue="Body" value="{!etemp.Body}"/>
+                            <apex:column headerValue="DeveloperName" value="{!etemp.DeveloperName}"/>
+                            <apex:column headerValue="Description" value="{!etemp.Description}"/>
+                            <apex:column headerValue="Encoding" value="{!etemp.Encoding}"/>
+                            <apex:column headerValue="IsActive" > <apex:outputtext value="{!etemp.IsActive}"/> </apex:column>
+                            <apex:column headerValue="RelatedEntityType" value="{!etemp.RelatedEntityType}"/>
+                            <apex:column headerValue="TemplateStyle" value="{!etemp.TemplateStyle}"/>
+                            <apex:column headerValue="TemplateType" value="{!etemp.TemplateType}"/>
+                            <apex:column headerValue="TimesUsed" value="{!etemp.TimesUsed}"/>
+                            <apex:column headerValue="Author" value="{!etemp.owner.Name}"/>
+                            <apex:column headerValue="LastUsed">
+                                <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                    <apex:param value="{!eTemp.LastUsedDate}"/>
+                                </apex:outputText>
+                            </apex:column>
+                        </apex:dataTable> 
+                        <apex:pageBlockButtons >
+                            <apex:commandButton value="Next"  action="{!getNextCountTemplate}" rendered="{!hasNextTemplate}" rerender="emailTemBlock" status="status"/>
+                            <apex:commandButton value="Previous" action="{!getPreviousCountTemplate}" rendered="{!hasPreviousTemplate}" rerender="emailTemBlock" status="status"/>
+                        </apex:pageBlockButtons> 
+                    </apex:pageBlock> 
+                </apex:pageBlock>
+            </apex:tab>
+            <apex:tab label="Approval Processes">
+                <apex:pageBlock >
+                    <apex:pageBlockButtons location="top">
+                        <!--<apex:commandButton value="Export" action="{!exportTemplates}"/>-->
+                        <apex:commandLink value="Export" title="Export" action="{!exportApprovals}" target="_blank" styleClass="btn" style="padding:.5%"/>
+                    </apex:pageBlockButtons>
+                    
+                    <apex:outputPanel styleClass="blue" layout="block">
+                        <apex:pageBlockSection title="Approval Processes MetaData" collapsible="false"/>
+                    </apex:outputPanel>
+                    <div style="padding-bottom:15px">
+                    </div>
+                    <apex:pageBlock id="approvalBlock"> 
+                        <apex:dataTable value="{!approvalProcessList}" var="approvalProcessItem" id="approvalProcessTable" border="1" cellpadding="10" cellspacing="1">
+                            <apex:column headerValue="Name"  value="{!approvalProcessItem.label}"/>
+                            <apex:column headerValue="Object">
+                                {!LEFT(approvalProcessItem.fullName, FIND('.', approvalProcessItem.fullName)-1)}
+                            </apex:column>
+                            <apex:column headerValue="Status">
+                                <apex:outputText rendered="{!!approvalProcessItem.active}"> InActive</apex:outputText>
+                                <apex:outputText rendered="{!approvalProcessItem.active}"> Active</apex:outputText>
+                            </apex:column>
+                            <apex:column headerValue="Entry Criteria">
+                                <apex:outputText >{!approvalProcessItem.entryCriteria.formula}</apex:outputText>
+                                <apex:dataList value="{!approvalProcessItem.entryCriteria.criteriaItems}" var="criteriaItem">    
+                                    {!criteriaItem.field} &nbsp; &nbsp;  {!criteriaItem.operation}  &nbsp; &nbsp; {!criteriaItem.value}
+                                    <br/><br/>
+                                </apex:dataList>
+                            </apex:column>
+                            <apex:column headerValue="Actions">
+                                <apex:outputLabel rendered="{!approvalProcessItem.initialSubmissionActions.action != null}"><b>Initial Submission Approval Actions</b></apex:outputLabel>
+                                <apex:dataList value="{!approvalProcessItem.initialSubmissionActions.action}" var="iniSubmissionAction">
+                                    Action Name : {!iniSubmissionAction.name}<br/>
+                                    Action Type : {!iniSubmissionAction.type_x}
+                                </apex:dataList>
+                                <apex:outputLabel rendered="{!approvalProcessItem.finalApprovalActions.action != null}"><b>Final Approval Actions</b></apex:outputLabel>
+                                <apex:dataList value="{!approvalProcessItem.finalApprovalActions.action}" var="fApprAction">
+                                    Action Name : {!fApprAction.name}<br/>
+                                    Action Type : {!fApprAction.type_x}
+                                </apex:dataList>
+                                <apex:outputLabel rendered="{!approvalProcessItem.finalRejectionActions.action != null}"><b>Final Rejection Actions</b></apex:outputLabel>
+                                <apex:dataList value="{!approvalProcessItem.finalRejectionActions.action}" var="fRejAction">
+                                    Action Name : {!fRejAction.name}<br/>
+                                    Action Type : {!fRejAction.type_x}
+                                </apex:dataList>
+                                <apex:outputLabel rendered="{!approvalProcessItem.recallActions.action != null}"><b>Final Re Call Actions</b></apex:outputLabel>
+                                <apex:dataList value="{!approvalProcessItem.recallActions.action}" var="reCallAction">
+                                    Action Name : {!reCallAction.name}<br/>
+                                    Action Type : {!reCallAction.type_x}
+                                </apex:dataList>
+                            </apex:column>
+                            <apex:column headerValue="Description" value="{!approvalProcessItem.description}"/>
+                        </apex:dataTable>
+                        <apex:pageBlockButtons >
+                            <apex:commandButton value="Next"  action="{!getNextCount}" rendered="{!hasNext}" rerender="approvalBlock" status="status"/>
+                            <apex:commandButton value="Previous" action="{!getPreviousCount}" rendered="{!hasPrevious}" rerender="approvalBlock" status="status"/>
+                        </apex:pageBlockButtons> 
+                    </apex:pageBlock> 
+                </apex:pageBlock>
+            </apex:tab>
+            <apex:tab label="Workflow Rules" name="Workflows" id="tabWorkflows">
+                <apex:pageBlock >
+                    <apex:pageBlockButtons location="top">
+                        <!--<apex:commandButton value="Export" action="{!exportTemplates}"/>-->
+                        <apex:commandLink value="Export" title="Export" action="{!exportworkflow}" target="_blank" styleClass="btn" style="padding:.5%"/>
+                    </apex:pageBlockButtons>
+                    
+                    <apex:outputPanel styleClass="blue" layout="block">
+                        <apex:pageBlockSection title="Work Flows MetaData" collapsible="false"/>
+                    </apex:outputPanel>
+                    <div style="padding-bottom:15px">
+                    </div>
+                    <apex:pageBlock id="workFlowBlock">
+                        <apex:dataTable value="{!workFlowMetaResult}" var="wflow" id="apprBlock" border="1" cellpadding="10" cellspacing="1">
+                            <apex:column headerValue="Name" value="{!wflow.name}" /> 
+                            <apex:column headerValue="Object" value="{!wflow.objectName}"/> 
+                            <!--<apex:column headerValue="API Name" value="{!wflow.fullname}" />-->
+                            <apex:column headerValue="Active" value="{!wflow.metadata.active}"/>
+                            <apex:column headerValue="Rule Criteria">
+                                <apex:outputPanel rendered="{!wflow.metadata.formula != null}"> 
+                                    <ul>
+                                        <li>{!wflow.metadata.formula}</li>
+                                    </ul>
+                                </apex:outputPanel>
+                                <apex:dataList value="{!wflow.metadata.criteriaItems}" var="criteriaItem">
+                                    {!criteriaItem.field}  {!criteriaItem.operation}  {!criteriaItem.value} 
+                                </apex:dataList>
+                            </apex:column>
+                            <apex:column headerValue="Evaluation Criteria" value="{!wflow.metadata.triggerType}"/>
+                            <apex:column headerValue="Immediate Actions">
+                                <apex:dataList value="{!wflow.metadata.actions}" var="action">
+                                    Action Name : {!action.name}<br/>
+                                    Action Type : {!action.type}
+                                </apex:dataList>
+                            </apex:column>
+                            <apex:column headerValue="Time Dependent Actions">
+                                <apex:repeat value="{!wflow.metadata.workflowTimeTriggers}" var="timeDependAction">
+                                    <apex:dataList value="{!timeDependAction.actions}" var="action">
+                                        Action Name : {!action.name}
+                                        <br/><br/>
+                                        Action Type : {!action.type}
+                                    </apex:dataList>
+                                </apex:repeat>
+                            </apex:column>
+                            <apex:column headerValue="Description" value="{!wflow.metadata.description}"/>
+                        </apex:datatable>
+                        <apex:pageBlockButtons >
+                            <apex:commandButton value="Next"  action="{!getNextCountFlow}" rendered="{!hasNextFlow}" status="status" reRender="workFlowBlock"/>
+                            <apex:commandButton value="Previous" action="{!getPreviousCountFlow}" rendered="{!hasPreviousFlow}" status="status" reRender="workFlowBlock"/>
+                        </apex:pageBlockButtons>
+                    </apex:pageBlock>
+                </apex:pageBlock>
+            </apex:tab>
+            <apex:tab label="Processes" name="Flows" id="tabProcesses">
+                <apex:pageBlock >
+                    <apex:pageBlockButtons location="top">
+                        <!--<apex:commandButton value="Export" action="{!exportTemplates}"/>-->
+                        <apex:commandLink value="Export" title="Export" action="{!exportFlows}" target="_blank" styleClass="btn" style="padding:.5%"/>
+                    </apex:pageBlockButtons>
+                    
+                    <apex:outputPanel styleClass="blue" layout="block">
+                        <apex:pageBlockSection title="Process Builder (Flows) MetaData" collapsible="false"/>
+                    </apex:outputPanel>
+                    <div style="padding-bottom:15px">
+                    </div>
+                    <apex:pageBlock id="flowBlock"> 
+                        <apex:dataTable value="{!flowList}" var="flowItem" border="1" cellpadding="10" cellspacing="1">
+                            <apex:column headerValue="Flow Name"  value="{!flowItem.label}"/>
+                            <apex:column headerValue="Object">
+                                <apex:repeat value="{!flowItem.processMetadataValues}" var="processMeta">
+                                    <apex:outputText value="{!processMeta.value.stringValue}" rendered="{!processMeta.name == 'ObjectType'}"/>
+                                </apex:repeat>
+                            </apex:column>
+                            <apex:column headerValue="Status" value="{!flowItem.status}"/>
+                            <apex:column headerValue="Description"  value="{!flowItem.description}"/>
+                            <apex:column headerValue="Process Type" value="{!flowItem.processType}"/>
+                            <apex:column headerValue="Criteria" >
+                                <apex:dataTable value="{!flowItem.decisions}" var="decisionrule">
+                                    <apex:column ><b>=>{!decisionrule.name}</b>
+                                        <apex:dataTable value="{!decisionrule.rules}" var="rule">
+                                            <apex:column ><b>{!rule.Name} - {!rule.label}</b>
+                                                <apex:dataList value="{!rule.conditions}" var="condition">
+                                                    {!condition.leftValueReference}   <br/>{!condition.operator}<br/>
+                                                    <apex:outputText value="{!condition.rightValue.numberValue}"/>
+                                                    <apex:outputText value="{!condition.rightValue.dateTimeValue}"/>
+                                                    <apex:outputText value="{!condition.rightValue.dateValue}"/>
+                                                    <apex:outputText value="{!condition.rightValue.elementReference}"/>
+                                                    <apex:outputText value="{!condition.rightValue.stringValue}"/>
+                                                    <apex:outputText value="{!condition.rightValue.booleanValue}" rendered="{!condition.rightValue.numberValue == null && condition.rightValue.dateTimeValue == null && condition.rightValue.stringValue == ''
+                                                                                                                            && condition.rightValue.dateValue == null && condition.rightValue.elementReference == null}"/>
+                                                </apex:dataList>
+                                            </apex:column>
+                                        </apex:dataTable>
+                                    </apex:column>
+                                </apex:dataTable>
+                            </apex:column>
+                            <apex:column headerValue="Actions">
+                                <apex:dataList value="{!flowItem.actionCalls}" var="actionCall"> 
+                                    <b>Action Type : </b>{!actionCall.actionType},<br/>
+                                    <b>Action Name : </b>{!actionCall.actionName}  
+                                </apex:dataList>
+                                <apex:outputLabel rendered="{!flowItem.recordCreates != null}"><b>=>Record Create Actions</b><br/></apex:outputLabel>
+                                <apex:dataList value="{!flowItem.recordCreates}" var="recordCreate">
+                                    <b>Action Name : {!recordCreate.name} - {!recordCreate.label}</b>
+                                    <apex:dataList value="{!recordCreate.inputAssignments}" var="inputAssignment">
+                                        {!inputAssignment.field} = 
+                                        <apex:outputText value="{!inputAssignment.value.numberValue}"/>
+                                        <apex:outputText value="{!inputAssignment.value.dateTimeValue}"/>
+                                        <apex:outputText value="{!inputAssignment.value.dateValue}"/>
+                                        <apex:outputText value="{!inputAssignment.value.elementReference}"/>
+                                        <apex:outputText value="{!inputAssignment.value.stringValue}"/>
+                                        <apex:outputText value="{!inputAssignment.value.booleanValue}" rendered="{!inputAssignment.value.numberValue == null && inputAssignment.value.dateTimeValue == null && inputAssignment.value.stringValue == ''
+                                                                                                                 && inputAssignment.value.dateValue == null && inputAssignment.value.elementReference == null}"/>
+                                    </apex:dataList>
+                                </apex:dataList>
+                                <apex:outputLabel rendered="{!flowItem.recordUpdates != null}"><b>=>Record Update Actions</b><br/></apex:outputLabel>
+                                <apex:dataList value="{!flowItem.recordUpdates}" var="recordUpdate">    
+                                    <b>Action Name : {!recordUpdate.name} - {!recordUpdate.label}</b>
+                                    <apex:dataList value="{!recordUpdate.inputAssignments}" var="inputAssignment">
+                                        {!inputAssignment.field} = 
+                                        <apex:outputText value="{!inputAssignment.value.numberValue}"/>
+                                        <apex:outputText value="{!inputAssignment.value.dateTimeValue}"/>
+                                        <apex:outputText value="{!inputAssignment.value.dateValue}"/>
+                                        <apex:outputText value="{!inputAssignment.value.elementReference}"/>
+                                        <apex:outputText value="{!inputAssignment.value.stringValue}"/>
+                                        <apex:outputText value="{!inputAssignment.value.booleanValue}" rendered="{!inputAssignment.value.numberValue == null && inputAssignment.value.dateTimeValue == null && inputAssignment.value.stringValue == ''
+                                                                                                                 && inputAssignment.value.dateValue == null && inputAssignment.value.elementReference == null}"/>
+                                    </apex:dataList>
+                                </apex:dataList>
+                            </apex:column>
+                        </apex:dataTable>
+                        <apex:pageBlockButtons >
+                            <apex:commandButton value="Next"  action="{!getNextFlowCountProcess}" rendered="{!hasNextProcess}" rerender="flowBlock" status="status"/>
+                            <apex:commandButton value="Previous" action="{!getPreviousFlowCountProcess}" rendered="{!hasPreviousProcess}" rerender="flowBlock" status="status"/>
+                        </apex:pageBlockButtons> 
+                    </apex:pageBlock> 
+                </apex:pageBlock>
+            </apex:tab>
+        </apex:tabPanel>  
+    </apex:form>
+    <script>
+    function callObjectExport() {
+        var baseUrl = "{!$Site.BaseSecureUrl}";
+        
+        var element = document.getElementsByClassName("objectName")[0];
+        var selectedObjectName = element.options[element.selectedIndex].value;
+        window.open(baseUrl + '/apex/ObjectMetaDataPage?selectedObjName='+ selectedObjectName, '_blank');
+    }
+    
+    function callProfileExport() {
+        var baseUrl = "{!$Site.BaseSecureUrl}";
+        
+        var element = document.getElementsByClassName("profileName")[0];
+        var selectedProfile = element.options[element.selectedIndex].value;
+        window.open(baseUrl + '/apex/ProfileMetaDataInfo?profileName='+ selectedProfile, '_blank');
+    }
+    
+    function callPermissionSetExport() {
+        var baseUrl = "{!$Site.BaseSecureUrl}";
+        
+        var element = document.getElementsByClassName("permissionSetName")[0];
+        var selectedPermissionSetName = element.options[element.selectedIndex].value;
+        window.open(baseUrl + '/apex/PermissionSetsMetaDataInfo?permissionSetName='+ selectedPermissionSetName, '_blank');
+    }
+    </script>
+</apex:page>

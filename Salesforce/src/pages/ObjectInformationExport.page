@@ -1,0 +1,18 @@
+<apex:page controller="RetrieveObjectMetaDataController" sidebar="false" contentType="application/vnd.ms-excel#{!selectedObject}ObjectMetaDataInfo.xls">
+     <apex:pageBlock Title=" {!selectedObject} Object and Fields">
+         <apex:pageBlockTable value="{!Wrapperlst}" var="l" id="pb">
+            <apex:column value="{!l.fd.EntityDefinition.developerName}" headerValue="Object"/>
+            <apex:column value="{!l.fd.Label}" headerValue="Field Label"/>
+            <apex:column value="{!l.fd.MasterLabel}" headerValue="Field Name"/>
+            <apex:column value="{!l.fd.QualifiedApiName}" headerValue="Field API"/>
+            <apex:column value="{!l.fd.DataType}" headerValue="Data Type"/>
+            <apex:column value="{!l.stdOrCust}" headerValue="Standard or Custom Field" />
+            <apex:column value="{!l.fd.ControllingFieldDefinitionId} {!l.fd.ControllingFieldDefinition.DeveloperName} {!l.fd.ControllingFieldDefinition.Label}" headerValue="Controlling Field"/>        
+            <apex:column value="{!l.description}" headerValue="Field Description" />
+            <apex:column value="{!l.inlineHelpText}" headerValue="Help Text" />
+            <apex:column headerValue="IsIndexed">{!l.fd.IsIndexed}</apex:column>
+            <apex:column value="{!l.fd.NamespacePrefix}" headerValue="installed package Namespaceprefix" />
+            <apex:column headerValue="History Tracking">{!l.fd.IsFieldHistoryTracked}</apex:column>
+        </apex:pageBlockTable> 
+        </apex:pageBlock>  
+</apex:page>

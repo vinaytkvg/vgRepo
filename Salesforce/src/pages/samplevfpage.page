@@ -1,0 +1,36 @@
+<apex:page standardController="Account" recordSetVar="acc" >
+<apex:form >
+<apex:pageBlock title="Hello {!$User.FirstName}!">
+You are displaying values from the {!account.name} account and a separate contact
+that is specified by a query string parameter.
+</apex:pageBlock>
+<apex:pageBlock title="Contacts" >
+<apex:variable var="sr" value="{!0}"/>
+<apex:pageblockTable value="{!acc}" var="a">
+<apex:column headerValue="Sr.No">
+      <apex:variable var="sr" value="{!sr + 1}"/>
+        {!sr}
+</apex:column>
+<apex:column headerValue="Account Name">{!a.name}</apex:column>
+<apex:column headerValue="contactdetails ">
+<apex:pageBlockTable value="{!a.contacts}" var="contact" title="contact">
+<apex:column >
+<apex:facet name="header">Name</apex:facet>
+<apex:commandLink value="{!contact.Name}" reRender="page" >
+<apex:param name="cid" value="{!contact.id}"/>
+<apex:param name="cName" value="{!contact.Name}"/>
+</apex:commandLink>  
+</apex:column>
+<apex:column >
+<apex:facet name="header">Phone</apex:facet>
+{!contact.Phone}
+</apex:column>
+</apex:pageBlockTable>
+</apex:column>
+</apex:pageblockTable>
+</apex:pageBlock>
+<apex:pageBlock title="{!$CurrentPage.parameters.cName}" id="page">
+<apex:detail subject="{!$CurrentPage.parameters.cid}" relatedList="true" title="false"/>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

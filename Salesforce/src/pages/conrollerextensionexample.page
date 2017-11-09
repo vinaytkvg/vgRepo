@@ -1,0 +1,14 @@
+<apex:page standardController="Account" recordSetVar="accounts" extensions="ConrollerExtensionExamplePageExtension" >
+ <apex:form >
+ <apex:pageBlock >
+ <apex:pageBlockTable value="{!AccRecords}" var="acr" >
+ <apex:column value="{!acr.Id}"/>
+ <apex:column value="{!acr.name}"/>
+ </apex:pageBlockTable>
+ <apex:panelGrid columns="2" cellpadding="" cellspacing="100">
+  <apex:commandLink action="{!nextMethod}" value="Ne"/>
+  <apex:commandButton value="pre" action="{!previousMethod}"/>
+ </apex:panelGrid>
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

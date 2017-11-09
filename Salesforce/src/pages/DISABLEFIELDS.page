@@ -1,0 +1,12 @@
+<apex:page >
+
+UserName <input type="text" id="v"/>
+<button onClick="disable()">Dis</button>
+<script>
+function disable(){
+document.getElementById("v").readOnly="true";
+}
+
+</script>
+
+</apex:page>

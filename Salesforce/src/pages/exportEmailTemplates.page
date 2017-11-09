@@ -1,0 +1,24 @@
+<apex:page controller="MetaDataComponentPageController" contentType="application/vnd.ms-excel#EmailTemplateMetaData.xls">
+        <apex:pageBlock title="Email Templates" >
+              <apex:dataTable value="{!emailTempResult}" var="etemp" id="EmailTempTable" border="1" cellpadding="10" cellspacing="1">
+                 <apex:column headerValue="Name" value="{!etemp.name}"/>
+                 <apex:column headerValue="Subject" value="{!etemp.Subject}"/>
+                 <apex:column headerValue="Body" value="{!etemp.Body}"/>
+                 <apex:column headerValue="DeveloperName" value="{!etemp.DeveloperName}"/>
+                 <apex:column headerValue="Description" value="{!etemp.Description}"/>
+                 <apex:column headerValue="Encoding" value="{!etemp.Encoding}"/>
+                 <apex:column headerValue="IsActive" > <apex:outputtext value="{!etemp.IsActive}"/> </apex:column>
+                 <apex:column headerValue="RelatedEntityType" value="{!etemp.RelatedEntityType}"/>
+                 <apex:column headerValue="TemplateStyle" value="{!etemp.TemplateStyle}"/>
+                 <apex:column headerValue="TemplateType" value="{!etemp.TemplateType}"/>
+                 <apex:column headerValue="TimesUsed" value="{!etemp.TimesUsed}"/>
+                 <apex:column headerValue="Author" value="{!etemp.owner.Name}"/>
+                 <apex:column headerValue="LastUsed">
+                     <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                     <apex:param value="{!eTemp.LastUsedDate}"/>
+                     </apex:outputText>
+                  </apex:column>
+             </apex:dataTable>  
+        </apex:pageBlock>
+
+</apex:page>

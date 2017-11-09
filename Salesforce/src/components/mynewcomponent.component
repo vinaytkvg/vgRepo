@@ -1,0 +1,8 @@
+<apex:component >
+    <apex:attribute name="record" type="object" description="TODO: Describe me"/>
+   <b>
+<apex:outputText value="This is my custom component."/>
+<apex:pageBlock title="Viewing {!record}"/>
+ <apex:detail relatedList="false"/>
+</b>
+</apex:component>

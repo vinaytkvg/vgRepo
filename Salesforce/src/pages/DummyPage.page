@@ -1,0 +1,14 @@
+<apex:page standardController="Account" extensions="AccountExtensionClass">
+<apex:pageMessages ></apex:pageMessages>
+<apex:form >
+<apex:outputField value="{!account['name']}"/>
+<apex:pageBlock >
+<apex:pageBlockTable value="{!accounts}" var="a">
+<apex:column headerValue="Account Name">
+<apex:outputField value="{!acc['name']}"/>
+</apex:column>
+</apex:pageBlockTable>
+</apex:pageBlock>
+<apex:commandButton value="clcik" action="{!increaseAnnualRevenue}"/>
+</apex:form>
+</apex:page>

@@ -1,0 +1,149 @@
+<apex:page controller="RetrieveProfileMetaDataController" sidebar="false" readOnly="true">
+    <style>
+        button.accordion {
+        background-color: blue;
+        color: #444;
+        cursor: pointer;
+        padding: 10px;
+        width: 100%;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+        }
+        
+        button.accordion.active, button.accordion:hover {
+        background-color: red; 
+        }
+        
+        div.panel {
+        padding: 0 18px;
+        display: none;
+        background-color: #b6d8ff;
+        }
+    </style>
+    <div style="text-align:center;background-color:#1798c1;font-family:Arial;font-size:18px;color:white;padding-left:0.5%;padding-bottom:0.5%;padding-top:0.5%"> 
+        <b>{!selectedProfile}'s Meta Data</b>
+    </div>
+    <apex:form >
+        <div style="padding:0.5%;margin-left:45%">
+        <apex:commandButton value="Export" action="{!exportProf}" />
+        </div>
+    </apex:form>
+        <apex:pageBlock id="ProfilePermissionId">
+            <button class="accordion">User Permissions</button>
+            <div class="panel">
+                <apex:pageBlockTable value="{!userPerLst}" var="up" title="User permissions">
+                    <apex:column value="{!up.name}" headerValue="Name"/>
+                    <apex:column value="{!up.enabled}" headerValue="Enabled"/>
+                </apex:pageBlockTable>  
+            </div>
+            <button class="accordion">Application Visibilities</button>
+            <div class="panel">
+                <apex:pageBlockTable value="{!appvisible}" var="up">
+                    <apex:column value="{!up.Application}" headerValue="Application"/>
+                    <apex:column value="{!up.Default_x}" headerValue="Default"/>
+                    <apex:column value="{!up.visible}" headerValue="visible"/>
+                </apex:pageBlockTable>  
+            </div>
+            <button class="accordion">Class Accesses</button>
+            <div class="panel">
+                <apex:pageBlockTable value="{!clsaccess}" var="up">
+                    <apex:column value="{!up.apexClass}" headerValue="Name"/>
+                    <apex:column value="{!up.enabled}" headerValue="Enabled"/>
+                </apex:pageBlockTable>  
+            </div>
+            <button class="accordion">Custom Permissions</button>
+            <div class="panel">
+                <apex:pageBlockTable value="{!custpermi}" var="up">
+                    <apex:column value="{!up.name}" headerValue="Name"/>
+                    <apex:column value="{!up.enabled}" headerValue="Enabled"/>
+                </apex:pageBlockTable>  
+            </div>
+            <button class="accordion">External DataSource Accesses</button>
+            <div class="panel">
+                <apex:pageBlockTable value="{!Extdasour}" var="up">
+                    <apex:column value="{!up.externalDataSource}" headerValue="externalDataSource"/>
+                    <apex:column value="{!up.enabled}" headerValue="Enabled"/>
+                </apex:pageBlockTable>  
+            </div>
+            <button class="accordion">Field Permissions</button>
+            <div class="panel">
+                <apex:pageBlockTable value="{!Fldper}" var="up">
+                    <apex:column value="{!up.field}" headerValue="field"/>
+                    <apex:column value="{!up.editable}" headerValue="editable"/>
+                    <apex:column value="{!up.readable}" headerValue="readable"/>
+                    <!-- <apex:column value="{!up.hidden}" headerValue="hidden"/> -->
+                </apex:pageBlockTable>  
+            </div>
+            <button class="accordion">Login IP Ranges</button>
+            <div class="panel">
+                <apex:pageBlockTable value="{!logipran}" var="up" title="User permissions">
+                    <!--  <apex:column value="{!up.description}" headerValue="description"/>-->
+                    <apex:column value="{!up.endAddress}" headerValue="endAddress"/>
+                    <apex:column value="{!up.startAddress}" headerValue="startAddress"/>
+                </apex:pageBlockTable>  
+            </div>
+            <button class="accordion">Object Permissions</button>
+            <div class="panel">
+                <apex:pageBlockTable value="{!Objpermi}" var="up" title="User permissions">
+                    <apex:column value="{!up.object_x}" headerValue="object"/>
+                    <apex:column value="{!up.allowCreate}" headerValue="allowCreate"/>
+                    <apex:column value="{!up.allowEdit}" headerValue="allowEdit"/>
+                    <apex:column value="{!up.allowDelete}" headerValue="allowDelete"/>
+                    <apex:column value="{!up.allowRead}" headerValue="allowRead"/>
+                    <apex:column value="{!up.modifyAllRecords}" headerValue="modifyAllRecords"/>
+                    <apex:column value="{!up.viewAllRecords}" headerValue="viewAllRecords"/>
+                </apex:pageBlockTable>  
+            </div>
+            <button class="accordion">Page Accesses</button>
+            <div class="panel">
+                <apex:pageBlockTable value="{!pageacce}" var="up">
+                    <apex:column value="{!up.apexPage}" headerValue="apexPage"/>
+                    <apex:column value="{!up.enabled}" headerValue="Enabled"/>
+                </apex:pageBlockTable>  
+            </div>
+            <button class="accordion">RecordType Visibilities</button>
+            <div class="panel">
+                <apex:pageBlockTable value="{!rectypvisi}" var="up" title="User permissions">
+                    <apex:column value="{!up.recordType}" headerValue="Name"/>
+                    <apex:column value="{!up.personAccountDefault}" headerValue="personAccountDefault"/>
+                    <apex:column value="{!up.default_x}" headerValue="default_x"/>
+                    <apex:column value="{!up.visible}" headerValue="visible"/>
+                </apex:pageBlockTable>  
+            </div>
+            <button class="accordion">Tab Visibilities</button>
+            <div class="panel">
+                <apex:pageBlockTable value="{!Tabvisi}" var="up" title="User permissions">
+                    <apex:column value="{!up.tab}" headerValue="tab"/>
+                    <apex:column value="{!up.visibility}" headerValue="visibility"/>
+                </apex:pageBlockTable>  
+            </div>
+            <button class="accordion">Layout Assignments</button>
+            <div class="panel">
+                <apex:pageBlockTable value="{!layoutAssign}" var="up" title="User permissions">
+                    <apex:column value="{!up.layout}" headerValue="layout"/>
+                    <apex:column headerValue="recordtype">
+                        <apex:outputText rendered="{!up.recordType == null}">Master</apex:outputText>
+                        <apex:outputText rendered="{!up.recordType != null}">{!up.recordType}</apex:outputText>
+                    </apex:column>
+                </apex:pageBlockTable>  
+            </div>
+        </apex:pageBlock>
+    <script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function(){
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        }
+    }
+    </script>
+</apex:page>

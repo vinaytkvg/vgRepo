@@ -1,0 +1,51 @@
+34.0 APEX_CODE,DEBUG;APEX_PROFILING,INFO;CALLOUT,INFO;DB,ERROR;SYSTEM,FINEST;VALIDATION,INFO;VISUALFORCE,INFO;WAVE,INFO;WORKFLOW,ERROR
+07:52:33.0 (402845)|USER_INFO|[EXTERNAL]|00590000002t9Th|vinay@ganesh.com|India Standard Time|GMT+05:30
+07:52:33.0 (443339)|EXECUTION_STARTED
+07:52:33.0 (447531)|CODE_UNIT_STARTED|[EXTERNAL]|01p90000006ZlDt|rest_AccountService.get
+07:52:33.0 (1956917)|SYSTEM_METHOD_ENTRY|[7]|System.RestContext.__sfdc_request()
+07:52:33.0 (1995274)|SYSTEM_METHOD_EXIT|[7]|System.RestContext.__sfdc_request()
+07:52:33.0 (2007931)|SYSTEM_METHOD_ENTRY|[8]|System.RestContext.__sfdc_response()
+07:52:33.0 (2022001)|SYSTEM_METHOD_EXIT|[8]|System.RestContext.__sfdc_response()
+07:52:33.0 (2033195)|SYSTEM_METHOD_ENTRY|[9]|System.RestRequest.__sfdc_requestURI()
+07:52:33.0 (2044895)|SYSTEM_METHOD_EXIT|[9]|System.RestRequest.__sfdc_requestURI()
+07:52:33.0 (2059863)|SYSTEM_METHOD_ENTRY|[9]|System.debug(ANY)
+07:52:33.0 (2067187)|USER_DEBUG|[9]|DEBUG|/accountservice/v1/account/0019000001jWvvz
+07:52:33.0 (2073528)|SYSTEM_METHOD_EXIT|[9]|System.debug(ANY)
+07:52:33.0 (2082178)|SYSTEM_METHOD_ENTRY|[10]|System.RestRequest.__sfdc_resourcePath()
+07:52:33.0 (2093605)|SYSTEM_METHOD_EXIT|[10]|System.RestRequest.__sfdc_resourcePath()
+07:52:33.0 (2100564)|SYSTEM_METHOD_ENTRY|[10]|System.debug(ANY)
+07:52:33.0 (2104149)|USER_DEBUG|[10]|DEBUG|/services/apexrest/accountservice/*/account/*
+07:52:33.0 (2109918)|SYSTEM_METHOD_EXIT|[10]|System.debug(ANY)
+07:52:33.0 (2115000)|SYSTEM_METHOD_ENTRY|[11]|System.RestRequest.__sfdc_requestURI()
+07:52:33.0 (2122499)|SYSTEM_METHOD_EXIT|[11]|System.RestRequest.__sfdc_requestURI()
+07:52:33.0 (2151857)|SYSTEM_METHOD_ENTRY|[11]|String.substringAfter(String)
+07:52:33.0 (2166132)|SYSTEM_METHOD_EXIT|[11]|String.substringAfter(String)
+07:52:33.0 (2192000)|SYSTEM_METHOD_ENTRY|[12]|Id.valueOf(String)
+07:52:33.0 (2213146)|SYSTEM_METHOD_EXIT|[12]|Id.valueOf(String)
+07:52:33.0 (2224387)|SYSTEM_METHOD_ENTRY|[12]|Id.getSobjectType(Id)
+07:52:33.0 (2255353)|SYSTEM_METHOD_EXIT|[12]|Id.getSobjectType(Id)
+07:52:33.0 (2315538)|SYSTEM_METHOD_ENTRY|[12]|com.salesforce.api.fast.System.compareObjects(Object, Object)
+07:52:33.0 (2339197)|SYSTEM_METHOD_EXIT|[12]|com.salesforce.api.fast.System.compareObjects(Object, Object)
+07:52:33.0 (10284394)|SYSTEM_METHOD_ENTRY|[15]|Blob.valueOf(String)
+07:52:33.0 (10318322)|SYSTEM_METHOD_EXIT|[15]|Blob.valueOf(String)
+07:52:33.0 (10375374)|SYSTEM_METHOD_ENTRY|[15]|System.RestResponse.__sfdc_responseBody(Blob)
+07:52:33.0 (10389035)|SYSTEM_METHOD_EXIT|[15]|System.RestResponse.__sfdc_responseBody(Blob)
+07:52:33.11 (11050655)|CUMULATIVE_LIMIT_USAGE
+07:52:33.11 (11050655)|LIMIT_USAGE_FOR_NS|(default)|
+  Number of SOQL queries: 1 out of 100
+  Number of query rows: 1 out of 50000
+  Number of SOSL queries: 0 out of 20
+  Number of DML statements: 0 out of 150
+  Number of DML rows: 0 out of 10000
+  Maximum CPU time: 0 out of 10000
+  Maximum heap size: 0 out of 6000000
+  Number of callouts: 0 out of 100
+  Number of Email Invocations: 0 out of 10
+  Number of future calls: 0 out of 50
+  Number of queueable jobs added to the queue: 0 out of 50
+  Number of Mobile Apex push calls: 0 out of 10
+
+07:52:33.11 (11050655)|CUMULATIVE_LIMIT_USAGE_END
+
+07:52:33.0 (11086068)|CODE_UNIT_FINISHED|rest_AccountService.get
+07:52:33.0 (11861841)|EXECUTION_FINISHED

@@ -1,0 +1,32 @@
+<apex:page showHeader="false">
+<apex:form >
+<style>
+.activeTab {background-color: blue; color:white;
+background-image:none}
+.inactiveTab { background-color: red; color:white;
+background-image:none}
+</style>
+  <apex:pageBlock >
+      <apex:tabPanel switchType="Client"  selectedTab="5" tabClass="activeTab" inactiveTabClass="inactiveTab"  >
+       
+       <apex:tab label="Home" name="5">
+       <apex:selectCheckboxes ></apex:selectCheckboxes>
+       </apex:tab>
+       <apex:tab label="Account" name="1">
+       
+       </apex:tab>
+      
+       <apex:tab label="Contact" name="2">
+       
+       </apex:tab>
+       <apex:tab label="Opportunities" name="3">
+       
+       </apex:tab>
+       <apex:tab label="Leads" name="4">
+       
+       </apex:tab>
+       
+      </apex:tabPanel>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

@@ -1,0 +1,15 @@
+<apex:page controller="productpro">
+ <apex:form >
+  PRODUCT NAME:<apex:inputText value="{!proName}">
+   <apex:actionSupport event="onkeyup" action="{!element}" reRender="v"/>
+   </apex:inputText>
+  PRODUCT QUANTITY:<apex:inputText value="{!quantity}">
+   <apex:actionSupport event="onkeyup" action="{!element}" reRender="v"/>
+     </apex:inputText>
+  PRODUCT PRICE:<apex:inputText value="{!price}">
+  <apex:actionSupport event="onkeyup" action="{!element}" reRender="v"/>
+  </apex:inputText>
+  TOTAL:<apex:outputText id="v" value="{!Total}"/>
+ 
+ </apex:form>
+</apex:page>

@@ -1,0 +1,8 @@
+<apex:page controller="setexample">
+    <apex:form >
+        <apex:outputLabel >test</apex:outputLabel>
+        <apex:dataList value="{!ac}" var="a">
+           {!a}
+        </apex:dataList>
+    </apex:form>
+</apex:page>

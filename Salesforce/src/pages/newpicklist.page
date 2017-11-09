@@ -1,0 +1,14 @@
+<apex:page controller="SamplePickLIst">
+  <apex:form >
+    <apex:selectList size="1" value="{!selected}">
+        <apex:selectOption itemLabel="None" itemValue="None"/>
+        <apex:selectOption itemLabel="Hyderabad" itemValue="Hyd"/>
+        <apex:selectOption itemLabel="Banglore" itemValue="Bng"/>
+        <apex:selectOption itemLabel="Cheenai" itemValue="Madras"/>
+        <apex:actionSupport event="onchange" action="{!callme}" reRender="pb"/>
+    </apex:selectList>
+      <apex:pageBlock id="pb">
+          {!result}
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

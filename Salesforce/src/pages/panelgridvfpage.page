@@ -1,0 +1,14 @@
+<apex:page >
+<apex:form >
+<a src="http://www.salesforce.com">google</a>
+<apex:panelGrid columns="2" rules="cols" frame="box" >
+    <apex:panelGrid columns="1" id="theGrid0" >
+        
+     
+    </apex:panelGrid>
+    <apex:panelGrid columns="1" id="theGrid1">
+       <apex:commandLink value="http://www.w3schools.com/"/>
+    </apex:panelGrid>
+</apex:panelGrid>
+</apex:form>
+</apex:page>

@@ -1,0 +1,26 @@
+<apex:page tabStyle="Opportunity" controller="NewOppControllerOf3Pages">
+<script>
+function confirmCanel(){
+var v=confirm("Are you sure to Cancel");
+if(v)return true;
+return false;
+}
+</script>
+<apex:sectionHeader title="New Customer Opportunity" subtitle="Step 2 Of 3"/>
+<apex:form >
+<apex:pageBlock title="Opportunity Information">
+<apex:pageBlockButtons >
+  <apex:commandButton value="Previous" action="{!step1}"/>
+ <apex:commandButton value="Next" action="{!step3}"/>
+ <apex:commandButton value="Cancel" action="{!cancel}" onclick=" return confirmCanel()"/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection title="opportunity Information">
+ <apex:inputField value="{!opportunity.name}"/>
+ <apex:inputField value="{!opportunity.Amount}"/>
+ <apex:inputField value="{!opportunity.closeDate}"/>
+ <apex:inputField value="{!opportunity.stageName}"/>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+
+</apex:page>

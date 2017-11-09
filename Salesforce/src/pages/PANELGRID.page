@@ -1,0 +1,50 @@
+<apex:page StandardController="Lead">
+<style>
+.colClass{
+width:60%;
+padding: 5px;
+}
+.myHeader {
+background: #cecece;
+font-weight: bold;
+}
+</style>
+
+<!-- Report Title - Date-->
+<apex:panelGrid width="100%" cellpadding="0" cellspacing="0" rules="all">
+<apex:outputText value="Title- Date"/> 
+</apex:panelGrid>
+
+<!-- The table-->
+<apex:panelGrid columns="2" width="100%" cellpadding="0" cellspacing="0" rules="all">
+
+<!-- Status column -->
+<apex:outputPanel style="padding:5px;" layout="block" styleClass="myHeader">
+<apex:outputText value="Status"/>
+</apex:outputPanel>
+
+<!-- Name - Phone column-->
+<apex:outputPanel style="padding:5px;" layout="block" styleClass="myHeader">
+<apex:outputText value="Name - Phone"/>
+</apex:outputPanel> 
+
+<!-- Status field value -->
+<apex:outputPanel style="padding:5px;" layout="block">
+<apex:outputText value="{!lead.status}"/> 
+</apex:outputPanel> 
+
+<!-- Name - Phone field value-->
+<apex:outputPanel style="padding:5px;" layout="block">
+<apex:panelGrid width="100%" cellpadding="0" cellspacing="0" rules="all">
+<apex:outputText value="{!lead.name}"/> 
+<apex:outputText value="{!lead.phone}"/> 
+</apex:panelGrid> 
+</apex:outputPanel>
+
+</apex:panelGrid>
+
+<!-- Comments Lines 1-->
+
+<apex:outputText value="Comments Line 1"/>
+
+</apex:page>

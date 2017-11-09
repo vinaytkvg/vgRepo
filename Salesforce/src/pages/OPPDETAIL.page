@@ -1,0 +1,14 @@
+<apex:page Controller="opplListName">
+  <apex:form >
+  <apex:pageBlock >
+   <apex:pageBlockTable value="{!opportunity}" var="opp">
+   <apex:column headerValue="Action">
+   <apex:inputCheckbox /> <apex:commandLink value="edit" action="{!edit}" style="color:red"/>|<apex:commandLink value="delete" action="{!save}" style="color:blue"/>
+           </apex:column>
+            <apex:column value="{!opp}" headerValue="ID"/>
+    <apex:column value="{!opp.Name}"/>
+    <apex:column value="{!opp.amount}"/>
+   </apex:pageBlockTable>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

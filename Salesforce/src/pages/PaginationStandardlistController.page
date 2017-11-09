@@ -1,0 +1,33 @@
+<apex:page standardController="Account" recordSetVar="accounts">
+ <apex:form >
+ <apex:pageBlock >
+  <apex:panelGrid columns="2">
+      <apex:outputLabel value="View :"/>
+      <apex:selectList value="{!filterId}" size="1">
+       <apex:actionSupport event="onchange"/>
+       <apex:selectOptions value="{!listViewoptions}"/>
+      </apex:selectList>
+  </apex:panelGrid>
+  <apex:variable value="{!0}" var="sr"/>
+  <apex:pageBlockButtons location="bottom" >
+  <apex:commandButton action="{!first}" value="First"/>
+   <apex:commandButton action="{!Next}" value="Next"/>
+   <apex:commandButton action="{!Previous}" value="Previous"/>
+   <apex:commandButton action="{!Last}" value="Last"/>
+  </apex:pageBlockButtons>
+  <apex:pageBlockButtons location="top">
+   <apex:commandButton action="{!save}" value="save"/>
+  </apex:pageBlockButtons>
+  <apex:pageBlockTable value="{!accounts}" var="a" id="table">
+   <apex:column headerValue="Sr.No">
+    <apex:variable value="{!sr+1}" var="sr"/>
+    {!sr}
+   </apex:column>
+   <apex:column value="{!a.name}"/>
+   <apex:column headerValue="Annual Revenue">
+   <apex:inputField value="{!a.annualRevenue}"/>
+   </apex:column>
+  </apex:pageBlockTable>
+ </apex:pageBlock> 
+ </apex:form>
+</apex:page>

@@ -1,0 +1,19 @@
+<apex:page controller="caloppRevenue">
+  <apex:form >
+   <apex:pageBlock >
+   
+    <apex:pageBlockTable value="{!opp}" var="o">
+     <apex:column value="{!o.Name}"/>
+     <apex:column value="{!o.AnnualRevenue}"/>
+     
+   
+     <apex:facet name="footer">
+                    <apex:outputText value="${0,number,00,000,000,000.00}" style="float:right;">
+                        <apex:param value="{!total}" />
+                    </apex:outputText>
+     </apex:facet>
+    
+    </apex:pageBlockTable>
+   </apex:pageBlock>
+  </apex:form>
+</apex:page>

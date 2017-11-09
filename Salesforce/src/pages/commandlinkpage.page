@@ -1,0 +1,13 @@
+<apex:page Controller="CommandLinkParams">
+    <apex:form >
+        <apex:pageBlock title="My Content" mode="edit">
+                          
+                      <apex:pageBlockButtons >
+                           <apex:commandlink action="{!mymethod}" value="check" >
+                            <apex:param value="myname" name="sample"/>
+                           </apex:commandlink>
+                           {!sample}
+                     </apex:pageBlockButtons>
+              </apex:pageBlock>
+    </apex:form>
+</apex:page>

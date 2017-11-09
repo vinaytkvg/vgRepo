@@ -1,0 +1,21 @@
+<apex:page controller="PLPAGEs" tabStyle="opportunity">
+ <apex:form >
+  <apex:pageBlock title="PICKLISTS" >
+  <apex:commandButton value="save" action="{!save}"/>
+   <apex:PageBlockSection title="PICKLIST1" >
+     <apex:selectList value="{!PickList1}" size="1">
+      <apex:selectOption itemLabel="INDIA" ItemValue="India"/>
+      <apex:selectOption itemLabel="RUSSIA" ItemValue="Russia"/>
+      <apex:selectOption itemLabel="AMERICA" ItemValue="America"/>
+      </apex:selectList>
+      <apex:outputText style="{color:red;}">SELECTRD CHOICE : {!PickList1}</apex:outputText>
+   </apex:PageBlockSection>
+   <apex:pageBlockSection title="PICKLIST2">
+    <apex:selectList value="{!PickList2}" size="1">
+     <apex:selectOptions value="{!PLIST2}"></apex:selectOptions>
+    </apex:selectList>
+     <apex:outputText style="{color:red;}">SELECTRD CHOICE : {!PickList2}</apex:outputText>
+   </apex:pageBlockSection>
+  </apex:pageBlock>
+ </apex:form> 
+</apex:page>

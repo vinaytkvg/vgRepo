@@ -1,0 +1,18 @@
+<apex:page standardController="lead">
+ <apex:form >
+  <apex:sectionHeader title="lead" subtitle="{!lead.name}"/>
+   <apex:pageBlock title="lead"> <apex:pageMessages />
+    <apex:pageBlockButtons > <apex:commandButton value="Save" action="{!Save}"/> 
+    <apex:commandButton value="Cancel" action="{!Cancel}"/>
+     </apex:pageBlockButtons> 
+     <apex:pageBlockSection title="New Section" columns="2">
+     <apex:inputField value="{!lead.IsUnreadByOwner}"/>
+      <apex:inputField value="{!lead.City}"/>
+       <apex:inputField value="{!lead.Description}"/> 
+<apex:inputField value="{!lead.Industry}"/>
+ <apex:inputField value="{!lead.Fax}"/> 
+ <apex:inputField value="{!lead.Status}"/>
+ </apex:pageBlockSection>
+  </apex:pageBlock> 
+  </apex:form> 
+  </apex:page>

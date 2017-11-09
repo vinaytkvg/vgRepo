@@ -1,0 +1,43 @@
+<apex:page controller="MetaDataComponentPageController" showHeader="false" contentType="application/vnd.ms-excel#WorkFlowMetaData.xls">
+   <apex:pageBlock >
+        <div style="background-color:#1798c1;font-family:Arial black;font-size:20px;">
+            <b>Work Flows</b>
+        </div>
+        <div style="padding-bottom:15px">
+        </div>
+        <apex:dataTable value="{!workFlowMetaResult}" var="wflow" id="flowTable" border="1" cellpadding="10" cellspacing="1">
+            <apex:column headerValue="Name" value="{!wflow.name}" /> 
+            <apex:column headerValue="Object" value="{!wflow.objectName}"/> 
+            <apex:column headerValue="Active" value="{!wflow.metadata.active}"/>
+            <apex:column headerValue="Rule Criteria">
+                <apex:outputPanel rendered="{!wflow.metadata.formula != null}"> 
+                        <ul>
+                            <li>{!wflow.metadata.formula}</li>
+                        </ul>
+                    </apex:outputPanel>
+                    <apex:dataList value="{!wflow.metadata.criteriaItems}" var="criteriaItem">
+                        {!criteriaItem.field}  {!criteriaItem.operation}  {!criteriaItem.value} 
+                    </apex:dataList>
+            </apex:column>
+            <apex:column headerValue="Evaluation Criteria" value="{!wflow.metadata.triggerType}"/>
+            <apex:column headerValue="Immediate Actions">
+                <apex:dataList value="{!wflow.metadata.actions}" var="action">
+                    Action Name : {!action.name}<br/>
+                    Action Type : {!action.type}
+                </apex:dataList>
+            </apex:column>
+            <apex:column headerValue="Time Dependent Actions">
+                <apex:repeat value="{!wflow.metadata.workflowTimeTriggers}" var="timeDependAction">
+                    <apex:dataList value="{!timeDependAction.actions}" var="action">
+                        Action Name : {!action.name}
+                        <br/><br/>
+                        Action Type : {!action.type}
+                    </apex:dataList>
+                </apex:repeat>
+            </apex:column>
+            <apex:column headerValue="Description" value="{!wflow.metadata.description}"/>
+        </apex:datatable>
+    </apex:pageBlock>  
+   
+   
+</apex:page>

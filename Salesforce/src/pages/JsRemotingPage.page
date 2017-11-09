@@ -1,0 +1,31 @@
+<apex:page controller="JSRemoteController" docType="html-5.0">
+
+<script>
+function getAccountDetails(){
+debugger;
+var accName=document.getElementById('searchAccountName').value;
+Visualforce.remoting.Manager.invokeAction(
+'{$RemoteAction.JSRemoteController.returnAccount}',
+accName,
+function(result,event){
+if(event.status){document.getElementById("AccId").value=result.Id;
+document.getElementById("AccName").value=result.name;
+}else if(event.type==='exception'){
+document.getElementById("errors").innerHTML=event.message;
+}else{
+document.getElementById("errors").innerHTML=event.message+' WHERE'+event.where;
+}
+},
+{escape:true}
+);
+}
+</script>
+  Account Serach:<input id="searchAccountName"/>
+  <input type="button" onclick="getAccountDetails()" value="GetAccountDetails"/>
+  
+  <div>
+   AccID:<apex:outputText id="AccId"></apex:outputText><br/>
+   AccName:<apex:outputText id="AccName"></apex:outputText>
+  </div>
+  <div id="errors"></div>
+</apex:page>

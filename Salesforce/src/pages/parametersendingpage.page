@@ -1,0 +1,22 @@
+<apex:page standardController="Account" extensions="AccountContactDetails" docType="html-5.0">
+<apex:pageBlock >
+
+<apex:form >
+<apex:pageBlockSection >
+  <apex:outputField value="{!Account.name}"/>
+</apex:pageBlockSection>
+<apex:pageBlockSection >
+ <apex:pageBlockTable value="{!conts}" var="con" id="del" >
+ 
+  <apex:column value="{!con.name}"/>
+  <apex:column value="{!con.Email}"/>
+  <apex:column headerValue="Action">
+ <pre> <apex:inputCheckbox />|  <b><apex:commandLink value="del" action="{!delContact}" reRender="Del"> <apex:param name="select" value="{!con.id}" assignTo="{!chosen}"/> </apex:commandLink></b> </pre>
+  </apex:column>
+ </apex:pageBlockTable>
+</apex:pageBlockSection>
+
+</apex:form>
+</apex:pageBlock>
+  
+</apex:page>

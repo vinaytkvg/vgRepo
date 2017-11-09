@@ -1,0 +1,20 @@
+<apex:page controller="CreateRecordInAccountNew">
+    <apex:form >
+     <apex:pageBlock >
+        <apex:pageBlockSection >
+          <apex:pageBlockSectionItem >
+            <apex:outputLabel value="Name"/> 
+              <apex:inputText value="{!aname}"/>
+          </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            <apex:outputLabel value="Phone"/> 
+              <apex:inputText value="{!aphone}"/>
+          </apex:pageBlockSectionItem>
+         </apex:pageBlockSection>
+         <apex:pageBlockButtons >
+          <apex:commandButton value="submit" action="{!submit}"/>
+              <apex:commandButton value="Reset" action="{!Reset}"/>
+         </apex:pageBlockButtons>
+      </apex:pageBlock>
+    </apex:form>
+</apex:page>

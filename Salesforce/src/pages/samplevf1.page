@@ -1,0 +1,21 @@
+<apex:page standardController="Employee__c" recordSetVar="emp">
+ <apex:form >
+ <apex:pageMessage severity="error" strength="3" > 
+ </apex:pageMessage>
+ <apex:pageMessage severity="info" strength="2" summary="YOU CAN DEP VALUE FROM ADMIN TO HR "></apex:pageMessage>
+ <apex:pageMessages ></apex:pageMessages>
+<apex:pageBlock title="EMPLOYEE DETAILS">
+<apex:pageBlockButtons >
+<apex:commandButton value="SAVE" action="{!SAVE}"/>
+</apex:pageBlockButtons>
+<apex:pageBlockTable value="{!emp}" var="e">
+<apex:column value="{!e.Name}"/>
+<apex:column value="{!e.Department__c}"/>
+<apex:column value="{!e.Salary__c}"/>
+<apex:column headerValue="DEPARTMENT of EMPLOYEE">
+<apex:inputField value="{!e.DEP_PL__c}"/>
+</apex:column>
+</apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

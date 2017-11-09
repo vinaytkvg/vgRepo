@@ -1,0 +1,17 @@
+<apex:page controller="ActionFunctionController">
+<apex:form >
+ <apex:pageBlock >
+ <!--<apex:actionFunction action="{!addFruits}" name="getFruits" reRender="second" status="wait"/>-->
+ 
+  <apex:selectList value="{!selected}" size="1" onchange="getFruits()" >
+  <apex:actionsupport action="{!addFruits}" event="onchange" reRender="second" status="wait"/>
+     <apex:selectOptions value="{!alphabet}" />
+  </apex:selectList>
+  <apex:actionStatus id="wait" startText="(inprogress......)" stopText="(Done)" rendered="{!selected==null}"/>
+   <br/>
+  <apex:selectList id="second">
+   <apex:selectOptions value="{!fruits}" />
+  </apex:selectList>
+   </apex:pageBlock>
+ </apex:form>
+</apex:page>

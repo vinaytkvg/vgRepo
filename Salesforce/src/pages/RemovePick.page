@@ -1,0 +1,11 @@
+<apex:page controller="Deletepick" >
+  <apex:form >
+   EnterPick:<apex:inputText value="{!PickValue}"/>
+   <apex:commandButton value="Add" Action="{!Addpick}"/><br/>
+   <apex:selectList value="{!selected}" size="1">
+    <apex:selectOptions value="{!options}"/>
+   </apex:selectList>
+   <apex:commandButton value="REMOVEPICKEDVALUE" action="{!deletep}" />
+   
+  </apex:form>
+</apex:page>

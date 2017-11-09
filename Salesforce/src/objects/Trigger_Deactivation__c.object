@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Trigger switches so that triggers can be disabled per profile</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Setting_Activated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Set to true to deactivate the triggers listed for the user/profile</description>
+        <externalId>false</externalId>
+        <label>Setting Activated</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Trigger_Names__c</fullName>
+        <description>Name(s) of the trigger affected by the setting. Multiple triggers can be entered, delimit with a semi-colon</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Apex Trigger name. Multiple triggers can be entered, delimit with a semi-colon</inlineHelpText>
+        <label>Trigger Names</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <label>Trigger Deactivation</label>
+    <visibility>Protected</visibility>
+</CustomObject>

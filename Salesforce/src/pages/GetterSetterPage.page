@@ -1,0 +1,39 @@
+<apex:page docType="html-5.0" controller="GetterSetterPage">
+ <apex:form >
+  <apex:pageBlock >
+  <apex:pageMessages ></apex:pageMessages>
+     <apex:pageBlockSection >
+         
+        <apex:panelGroup >
+           <apex:outputLabel for="search">Search : </apex:outputLabel>
+           <apex:input type="text" value="{!searchText}" id="serach"/>
+           <apex:commandButton value="Search" action="{!doSearch}" status="status">
+            <apex:actionSupport event="onclick" reRender="ta"/>
+           </apex:commandButton>
+        </apex:panelGroup>
+        
+     </apex:pageBlockSection>
+     <apex:actionStatus startText="Searching...." id="Status"/>
+     <apex:pageBlockSection title="Search Deatils" id="ta" >
+       <apex:pageBlockTable value="{!accs}" var="r" rendered="{!NOT(ISNULL(accs))}">
+        <apex:column >
+            <apex:facet name="header">ID</apex:facet>
+            <apex:commandLink action="{!accDetailMethod}"> 
+            <apex:param value="{!r.id}" assignTo="{!accid}" name="ACC"/>
+             {!r.id}
+            </apex:commandLink>
+        </apex:column>
+        <apex:column value="{!r.name}"/>
+       </apex:pageBlockTable>
+       <br/>
+       <apex:pageBlockTable value="{!cons}" var="r" rendered="{!NOT(ISNULL(cons))}">
+        <apex:column value="{!r.Id}"/>
+        <apex:column value="{!r.firstName}"/>
+        <apex:column value="{!r.lastName}"/>
+        <apex:column value="{!r.Email}"/>
+       </apex:pageBlockTable>
+       
+     </apex:pageBlockSection>
+  </apex:pageBlock>
+ </apex:form>
+</apex:page>

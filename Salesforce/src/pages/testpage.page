@@ -1,0 +1,17 @@
+<apex:page controller="testpagecontroller">
+  <apex:form id="vinay">
+  <div id="reload">
+       
+              <apex:selectCheckboxes value="{!optionName}">
+              <apex:selectOptions value="{!checkBocOptions}"/>
+              <apex:actionSupport event="onclick" action="{!debug}" reRender="vinay"/>
+              </apex:selectCheckboxes>
+          
+      <apex:outputText >{!sum}</apex:outputText>
+     <apex:commandButton value="test" action="{!debug}"/>
+  </div>
+  <div>
+  {!str},{!stringMethod},{!stringMethod2},{!str}
+  </div>
+  </apex:form>
+</apex:page>

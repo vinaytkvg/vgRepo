@@ -1,0 +1,29 @@
+<apex:page standardController="Case">
+<apex:form >
+  <apex:pageBlock >
+    <apex:panelGrid columns="2" width="1500">
+      
+              <apex:pageBlock >
+                <apex:pageBlockSection title="Caseinfo">
+                 <apex:inputField value="{!case.CaseNumber}"/>
+                 <apex:inputField value="{!case.Reason}"/>
+                </apex:pageBlockSection>
+                
+                <apex:pageBlockSection title="Omkar">
+                </apex:pageBlockSection>
+               </apex:pageBlock>
+            
+             <apex:pageBlock >
+                 <apex:pageBlockSection title="CaseAddiinfo">
+                   <apex:inputField value="{!case.Status}"/>
+                   <apex:inputField value="{!case.Type}"/>
+                  </apex:pageBlockSection>
+                  
+                  <apex:pageBlockSection title="Vinay">
+                   </apex:pageBlockSection>
+             </apex:pageBlock>
+         
+    </apex:panelGrid>
+  </apex:pageBlock>
+</apex:form>
+</apex:page>

@@ -1,0 +1,20 @@
+<apex:page controller="MetaDataComponentPageController" contentType="application/vnd.ms-excel#LayoutMetaData.xls">
+  <apex:pageBlock title="Layouts" >
+     <apex:dataTable value="{!layoutList}" var="layoutItem" id="flowTable" border="1" cellpadding="10" cellspacing="1">
+            <apex:column headerValue="Layout Name"  value="{!layoutItem.fullName}"/>
+            <apex:column headerValue="Fields Used">
+              <apex:datatable value="{!layoutItem.layoutSections}" var="laySection">
+                <apex:column >
+                    <apex:datatable value="{!laySection.layoutColumns}" var="layoutColumn">
+                        <apex:column >
+                            <apex:repeat value="{!layoutColumn.layoutItems}" var="layoutItem">
+                                <apex:outputText value="{!layoutItem.field}"/><br/>
+                            </apex:repeat>
+                        </apex:column>
+                    </apex:dataTable>
+              </apex:column>
+            </apex:datatable>
+           </apex:column>
+     </apex:dataTable>
+   </apex:pageBlock>
+ </apex:page>

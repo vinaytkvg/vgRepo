@@ -1,0 +1,22 @@
+<apex:page standardController="opportunity" recordSetVar="opp">
+ <apex:form >
+  <apex:pageBlock >
+  <apex:variable value="{!0}" var="sr"/>
+   <apex:pageBlockTable value="{!opp}" var="o">
+    <apex:column >
+     <apex:variable value="{!sr+1}" var="sr"/>
+     {!sr}
+    </apex:column>
+    <apex:column >
+     <apex:commandLink value="{!o.Name}" reRender="page">
+       <apex:param name="oppid" value="{!o.id}"/>
+      <apex:param name="oppName" value="{!o.Name}"/>
+     </apex:commandLink>
+    </apex:column>
+   </apex:pageBlockTable>
+  </apex:pageBlock>
+ </apex:form>
+ <apex:pageBlock title="{!$CurrentPage.parameters.oppName}" id="page">
+  <apex:detail subject="{!$CurrentPage.parameters.oppid}" relatedList="false"/>
+ </apex:pageBlock>
+</apex:page>

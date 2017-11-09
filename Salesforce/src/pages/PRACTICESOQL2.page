@@ -1,0 +1,17 @@
+<apex:page controller="ContactDetails">
+<apex:form >
+
+<apex:pageBlock >
+<apex:variable value="{!0}" var="v1"/>
+  <apex:pageBlockTable value="{!con}" var="v">
+  <apex:column headerValue="S.No">
+  <apex:variable value="{!v1+1}" var="v1"/>
+  {!v1}
+  </apex:column>
+  <apex:column ><apex:commandLink value="{!v.name}"/></apex:column>
+  <apex:column value="{!v.Account.name}"/>
+  <apex:column value="{!v.Account.annualRevenue}"/>
+  </apex:pageBlockTable>
+  </apex:pageBlock>
+</apex:form>
+</apex:page>

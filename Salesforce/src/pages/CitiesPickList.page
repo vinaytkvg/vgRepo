@@ -1,0 +1,9 @@
+<apex:page controller="citiesPick">
+   <apex:form >
+    <apex:pageBlock >
+           <apex:selectList >
+        <apex:selectOptions value="{!options}"/>
+    </apex:selectList>
+        </apex:pageBlock>
+       </apex:form>
+</apex:page>

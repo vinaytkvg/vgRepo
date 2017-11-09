@@ -1,0 +1,38 @@
+<apex:page standardController="Account">
+  <apex:form >
+     <apex:sectionHeader title="Account Edit" subtitle="New Account"/>
+     <apex:pageBlock title="Account Edit" mode="detail" >
+         <apex:pageBlockButtons ><apex:commandButton value="SAVE"/><apex:commandButton value="Save&New"/><apex:commandButton value="Cancel"/></apex:pageBlockButtons>
+            <apex:pageBlockSection title="Account Information" >
+<apex:pageBlockSectionItem >
+        <apex:outputLabel value="Account Name" />
+        <apex:inputText /> 
+ </apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel value="Parent Account"/>
+<apex:inputText />
+</apex:pageBlockSectionItem>  
+<apex:pageBlockSectionItem >
+<apex:outputLabel value="Account Number"/>
+<apex:inputText />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel value="Account Site"/>
+<apex:inputText />
+</apex:pageBlockSectionItem>
+<apex:inputField value="{!account.type}"/>
+<apex:inputField value="{!account.site}"/>
+<apex:inputField value="{!account.industry}"/>
+<apex:inputField value="{!account.Fax}"/>
+<apex:inputField value="{!account.AccountSource}"/>
+<apex:inputField value="{!account.AccountSource}"/>
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Address Information">
+<apex:pageBlockSectionItem >
+<apex:outputLabel value="Billing Street"/>
+<apex:inputText />
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>  
+</apex:page>

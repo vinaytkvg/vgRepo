@@ -1,0 +1,41 @@
+<apex:page standardController="Account" name="Accounts" recordSetVar="acc" docType="html-5.0"  showHeader="false" standardStylesheets="false">
+  <apex:stylesheet value="{!URLFOR($Resource.Mycss)}"/>
+ 
+  <apex:form >
+  <div id="f">LEARN BOOSTRAP JAVASCRIPTFRAMEWORKS</div>
+  <apex:pageBlock >
+  <table class="t" border="1" rows="40">
+  <th colspan="5" style="text-align:center;color:gray;padding:15px;">Account Table</th>
+  <tr>
+  <td>Sr.No</td>
+   <td>Select</td>
+   <td>Account Name</td>
+   <td>Annual Revenue</td>
+   <td style="background-color:yellow">Contact Details</td>
+  </tr><apex:variable value="{!0}" var="srn"/>
+  <apex:repeat value="{!acc}" var="a">
+   
+   <tr class="ar">
+    <td><apex:variable value="{!srn+1}" var="srn"/>{!srn}</td>
+    <td><apex:inputCheckbox /></td>
+    <td >{!a.name}</td>
+    <td>{!a.annualRevenue}</td>
+    <apex:variable value="{!0}" var="sr"/>
+    <td class="cr">
+    <table border="1"><tr><td>Sr.No</td><td>ContactName</td><td>Phone</td></tr>
+    <apex:repeat value="{!a.contacts}" var="c">
+    <tr><apex:variable value="{!sr+1}" var="sr"/>
+    <td>{!sr}</td>
+    <td>{!c.firstName}</td>
+    <td>{!c.phone}</td>
+    </tr>
+    </apex:repeat>
+    </table>
+    </td>
+   </tr>
+   
+  </apex:repeat>
+  </table>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

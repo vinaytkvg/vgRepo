@@ -1,0 +1,26 @@
+<apex:page controller="NameDemo" id="page">
+  <script>
+   function callMe(){
+  var id='TKVG0'+Math.floor(Math.random()*10)+Math.floor(Math.random()*10)+Math.floor(Math.random()*10);
+  vin(id);
+   }
+  </script>
+  <apex:form id="one">
+  <apex:actionFunction name="vin" action="{!show}" reRender="one">
+   <apex:param name="id" assignTo="{!idN}" value=""/>
+  </apex:actionFunction>
+  <apex:pageBlock >
+    <apex:pageBlockSection >
+     <apex:pageBlockSectionItem >
+      <apex:outputLabel value="EnterName"/>
+      <apex:inputText value="{!name}" onchange="callMe()"/>
+     </apex:pageBlockSectionItem>
+     
+      <apex:pageBlockSectionItem >
+      <apex:outputLabel value="Take Your ID"/>
+      <apex:outputText value="{!idN}" />
+     </apex:pageBlockSectionItem>
+     </apex:pageBlockSection>
+   </apex:pageBlock>
+  </apex:form>
+</apex:page>

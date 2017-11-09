@@ -1,0 +1,11 @@
+<apex:page >
+ <apex:outputPanel id="v1" layout="block">Myspan</apex:outputPanel>
+<apex:panelGrid columns="4" id="theGrid" border="5" captionStyle="Sample Table" cellpadding="15" cellspacing="5">
+<apex:facet name="header"> Sample Table</apex:facet>
+        <apex:outputText value="First" id="theFirst"/>
+        <apex:outputText value="Second" id="theSecond"/>
+        <apex:outputText value="Third" id="theThird"/>
+        <apex:outputText value="Fourth" id="theFourth"/>
+    </apex:panelGrid>
+ <apex:outputPanel id="v2" layout="block" style="color:red;">mydiv</apex:outputPanel>
+</apex:page>

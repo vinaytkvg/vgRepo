@@ -1,0 +1,21 @@
+<apex:page standardController="Opportunity" recordSetVar="opportunity" extensions="MakeReadOnly">
+ <apex:form >
+ <apex:pageBlock title="FiscalYear" >
+ <apex:pageBlockButtons >
+ <apex:commandButton value="SAVE" action="{!Save}"/>
+ </apex:pageBlockButtons>
+ <apex:pageBlockTable title="vin" value="{!opportunity}" var="opp">
+ <apex:column value="{!opp.Name}"/>
+ <apex:column headerValue="STATUS">
+ <apex:inputField value="{!opp.STATUS__c}"/>
+ </apex:column>
+ <apex:column headerValue="STARTDATE">
+ <apex:inputField value="{!opp.START_DATE__c}"/>
+ </apex:column>
+ <apex:column headerValue="ENDDATE">
+ <apex:inputField value="{!opp.END_DATE_CORRECT__c}"/>
+ </apex:column>
+   </apex:pageBlockTable>
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

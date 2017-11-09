@@ -1,0 +1,14 @@
+<apex:page standardController="Document" extensions="UploadFileProcessor">
+<apex:pageMessages ></apex:pageMessages>
+  <apex:form >
+  <apex:pageBlock >
+   <apex:pageBlockSection columns="3">
+       <apex:outputLabel value="Upload File"></apex:outputLabel>
+       <apex:inputFile value="{!document.body}" fileName="{!document.Name}" size="50" required="true"/>    
+   </apex:pageBlockSection>
+   <apex:pageBlockButtons location="bottom">
+       <apex:commandButton value="Submit File" action="{!submit}"/>
+   </apex:pageBlockButtons>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

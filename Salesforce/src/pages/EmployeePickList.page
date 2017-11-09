@@ -1,0 +1,14 @@
+<apex:page controller="Employee">
+    <apex:form >
+    <apex:pageBlock >
+       <apex:selectList size="1" value="{!selected}">
+           <apex:selectOptions value="{!EmpList}"/>
+           <apex:actionSupport event="onchange" reRender="page"/>
+        </apex:selectList>        
+    </apex:pageBlock>
+        <apex:pageBlock id="page">
+         <apex:outputText >Selceted value:{!selected}</apex:outputText>
+        </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

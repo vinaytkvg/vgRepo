@@ -1,0 +1,31 @@
+<apex:page standardController="Account" recordSetVar="acc" >
+<apex:form >
+ <apex:variable value="{!0}" var="sr"/>
+ <apex:pageBlock >
+  <apex:pageBlockTable value="{!acc}" var="a" rows="10">
+  <apex:column value="{!a.Id}" headerValue="Name"/>
+   <apex:column value="{!a.name}"/>
+   <apex:column headerValue="Annual Revenue">
+   <apex:outputField value="{!a.AnnualRevenue}">
+    <apex:inlineEditSupport showOnEdit="saveButton"/>
+   </apex:outputField>
+   </apex:column>
+   
+  </apex:pageBlockTable>
+  <apex:pageBlockButtons >
+  <apex:commandButton value="save" action="{!save}"/>
+  </apex:pageBlockButtons>
+  </apex:pageBlock>
+   </apex:form>
+ <!-- <apex:panelBar >
+  <apex:repeat value="{!acc.Contacts}" var="acc">
+  <apex:variable value="{!sr+1}" var="sr"></apex:variable>
+  <apex:panelBarItem label="NAME:{!acc.firstname}">{!sr}.Contact</apex:panelBarItem>
+   </apex:repeat><br/><br/>
+    <apex:variable value="{!0}" var="sr"/>
+   <apex:repeat value="{!acc.Opportunities}" var="opp">
+   <apex:variable value="{!sr+1}" var="sr"></apex:variable>
+    <apex:panelBarItem label="NAME:{!opp.name}">{!sr}.Opportunity</apex:panelBarItem>
+   </apex:repeat>
+  </apex:panelBar>-->
+</apex:page>

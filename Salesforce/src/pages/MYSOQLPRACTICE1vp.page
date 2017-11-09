@@ -1,0 +1,10 @@
+<apex:page controller="MYSOQLPARCTICE1">
+ <apex:form >
+ <apex:pageBlock >
+  <apex:pageBlockTable value="{!vin}" var="v">
+   <apex:column value="{!v.name}"/>
+   <apex:column value="{!v.phone}"/>
+  </apex:pageBlockTable>
+  </apex:pageBlock>
+ </apex:form>
+ </apex:page>

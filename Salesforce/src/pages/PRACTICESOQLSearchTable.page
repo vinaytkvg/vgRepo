@@ -1,0 +1,30 @@
+<apex:page controller="soql" >
+ <style type="text/css">
+        [id*=myId] { font-weight: bold;color:blue; }
+        center{
+               color:red;
+               font-family:TimesNewRoman;
+        }
+    </style>
+ <apex:form id="page">
+Find1:<apex:inputText value="{!Search}">
+<apex:actionSupport event="onchange" reRender="page"/>
+</apex:inputText>
+
+  <apex:variable value="{!0}" var="sr"/>
+  <apex:dataTable value="{!AccountDetails}" var="acc" frame="box" border="all" align="center"  cellpadding="5" bgcolor="lightgreen" onRowClick="style.backgroundColor='yellow'"   rendered="{!Search!=null}">
+   <apex:facet name="header"><center>Account Details</center></apex:facet>
+     <apex:column headerValue="Sr.No">
+      <apex:variable value="{!sr+1}" var="sr"/>
+      {!sr}
+     </apex:column>1
+     <apex:column value="{!acc.Name}" headerValue="Name"/>
+     <apex:column value="{!acc.Phone}" headerValue="Phone"/>
+     <apex:column value="{!acc.Billingcity}" headerValue="Address"/>
+     <apex:column value="{!acc.BillingLatitude}" headerValue="Latitude"/>
+     <apex:column value="{!acc.BillingLongitude}" headerValue="Longitude"/>
+    
+     <apex:column value="{!acc.Distance__c}" headerValue="Distance" id="myId" /> 
+  </apex:dataTable>
+ </apex:form>
+</apex:page>

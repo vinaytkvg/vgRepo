@@ -1,0 +1,7 @@
+<apex:page controller="CheckPicklist">
+  <apex:form >
+   <apex:selectList >
+    <apex:selectOptions value="{!options}"/>
+   </apex:selectList>
+  </apex:form>
+</apex:page>

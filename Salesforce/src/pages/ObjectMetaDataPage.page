@@ -1,0 +1,27 @@
+<apex:page controller="RetrieveObjectMetaDataController">
+    <apex:pageBlock id="objectInfoId">
+        <div style="text-align:center;background-color:#1798c1;font-family:Arial;font-size:18px;color:white;padding-left:0.5%;padding-bottom:0.5%;padding-top:0.5%"> 
+            <b>{!selectedObject}'s Meta Data</b>
+        </div>
+        <apex:form >
+            <div style="padding:0.5%;margin-left:45%">
+                <apex:commandButton action="{!exportObject}" value="Export" />
+            </div>
+        </apex:form>
+        
+        <apex:pageBlockTable value="{!Wrapperlst}" var="l" id="pb">
+            <apex:column value="{!l.fd.EntityDefinition.developerName}" headerValue="Object"/>
+            <apex:column value="{!l.fd.Label}" headerValue="Field Label"/>
+            <apex:column value="{!l.fd.MasterLabel}" headerValue="Field Name"/>
+            <apex:column value="{!l.fd.QualifiedApiName}" headerValue="Field API"/>
+            <apex:column value="{!l.fd.DataType}" headerValue="Data Type"/>
+            <apex:column value="{!l.stdOrCust}" headerValue="Standard or Custom Field" />
+            <apex:column value="{!l.fd.ControllingFieldDefinitionId} {!l.fd.ControllingFieldDefinition.DeveloperName} {!l.fd.ControllingFieldDefinition.Label}" headerValue="Controlling Field"/>        
+            <apex:column value="{!l.description}" headerValue="Field Description" />
+            <apex:column value="{!l.inlineHelpText}" headerValue="Help Text" />
+            <apex:column value="{!l.fd.IsIndexed}" headerValue="IsIndexed" />
+            <apex:column value="{!l.fd.NamespacePrefix}" headerValue="installed package Namespaceprefix" />
+            <apex:column headerValue="History Tracking">{!l.fd.IsFieldHistoryTracked}</apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

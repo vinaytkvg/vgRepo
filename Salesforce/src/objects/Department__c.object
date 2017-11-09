@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account_DEP__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Account DEP</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Departments</relationshipLabel>
+        <relationshipName>Departments</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Candidate__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>CANDIADATE INFO</label>
+        <referenceTo>CANDIDATE_INFO__c</referenceTo>
+        <relationshipLabel>Departments</relationshipLabel>
+        <relationshipName>Departments</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>DATE_TEXTCAP__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+  Start_Date__c &lt; Date(Year(Today()),MONTH(Today()),01),&apos;Process&apos;,
+ IF(
+ Date(Year(Start_Date__c),MONTH(Start_Date__c),01)&lt;  TODAY()  &amp;&amp; 
+  TODAY() &lt;Date(Year(Start_Date__c),MONTH(Start_Date__c),15), &apos;Partial Process&apos;, 
+
+
+
+IF( Start_Date__c&lt;=Today()&amp;&amp;ISBLANK(Account_DEP__c), &apos;Allow P&apos;, 
+IF(Start_Date__c&lt;=Today()&amp;&amp;Not(IsBLANK( Account_DEP__c )), &apos;P Allow&apos;,&apos;&apos;))
+
+)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>DATE TEXTCAP</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NUMBER__c</fullName>
+        <externalId>true</externalId>
+        <label>NUMBER</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NoEmployees__c</fullName>
+        <externalId>false</externalId>
+        <label>NoEmployees</label>
+        <summaryForeignKey>Employee__c.Department__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_salaries__c</fullName>
+        <externalId>false</externalId>
+        <label>Sum of salaries</label>
+        <summarizedField>Employee__c.Salary__c</summarizedField>
+        <summaryForeignKey>Employee__c.Department__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>VALID_CHECKBOX__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(Start_Date__c &lt;= TODAY() ,true,false)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>VALID CHECKBOX</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>max_salary__c</fullName>
+        <externalId>false</externalId>
+        <label>max salary</label>
+        <summarizedField>Employee__c.Salary__c</summarizedField>
+        <summaryForeignKey>Employee__c.Department__c</summaryForeignKey>
+        <summaryOperation>max</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>min_salary__c</fullName>
+        <externalId>false</externalId>
+        <label>min salary</label>
+        <summarizedField>Employee__c.Salary__c</summarizedField>
+        <summaryForeignKey>Employee__c.Department__c</summaryForeignKey>
+        <summaryOperation>min</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>sum_of_salaries_of_employees_del__c</fullName>
+        <externalId>false</externalId>
+        <label>sum of salaries of employees</label>
+        <summarizedField>Employee__c.CreatedDate</summarizedField>
+        <summaryForeignKey>Employee__c.Department__c</summaryForeignKey>
+        <summaryOperation>min</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>total_amount_del__c</fullName>
+        <externalId>false</externalId>
+        <label>total amount</label>
+        <summaryForeignKey>Employee__c.Department__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>total_tax__c</fullName>
+        <externalId>false</externalId>
+        <label>total tax</label>
+        <summarizedField>Employee__c.Salary__c</summarizedField>
+        <summaryForeignKey>Employee__c.Department__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <label>Department</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>OBJECT_ID</columns>
+        <columns>NAME</columns>
+        <columns>max_salary__c</columns>
+        <columns>min_salary__c</columns>
+        <columns>NoEmployees__c</columns>
+        <columns>Sum_of_salaries__c</columns>
+        <columns>total_tax__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>QUEUE1_Department</fullName>
+        <filterScope>Queue</filterScope>
+        <label>QUEUE1</label>
+        <queue>QUEUE1</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>Department Name</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Departments</pluralLabel>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypes>
+        <fullName>new_record</fullName>
+        <active>true</active>
+        <description>rtrytuyt</description>
+        <label>new record</label>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>NoEmployees__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Sum_of_salaries__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>UPDATEDBY_USER</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>NoEmployees__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>max_salary__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>min_salary__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>NoEmployees__c</searchFilterFields>
+        <searchFilterFields>total_tax__c</searchFilterFields>
+        <searchFilterFields>RECORDTYPE</searchFilterFields>
+        <searchResultsAdditionalFields>OBJECT_ID</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>NoEmployees__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Sum_of_salaries__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <startsWith>Vowel</startsWith>
+</CustomObject>

@@ -1,0 +1,24 @@
+<apex:component >
+<style>
+.h{font-weight: 900;
+text-decoration: underline;
+text-align:center;
+color:red;
+}
+.outputlabel{
+font-weight: 900;
+text-decoration: underline;
+text-align:center;
+color:red;
+}
+</style>
+ <center> <h1 class="h">MY FIRST COMPONENT</h1></center>
+ 
+ <apex:attribute name="fontrcolor" type="string" description="for heading clor"/>
+ <apex:outputLabel styleclass="outputlabel">MY FIRST COMPONENT</apex:outputLabel>
+ <apex:attribute name="record" description="Viewing The Records" type="object" required="true" />
+ <apex:pageBlock title="Viewing {!record}">
+  <apex:detail relatedList="false" />
+
+ </apex:pageBlock>
+ </apex:component>

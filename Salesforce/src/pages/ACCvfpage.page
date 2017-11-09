@@ -1,0 +1,40 @@
+<apex:page standardController="Account" recordSetVar="A" >
+
+<apex:form >
+<apex:sectionHeader title="Account Edit" subtitle="New Account"/><pre>                                                                                                     WELCOME TO:{! $user.firstName}</pre>
+ 
+  <apex:pageBlock title="Account" mode="edit" helpTitle="Help Page" HelpUrl="https://tkvg-dev-ed.my.salesforce.com/apexpages/apexcomponents.apexp">
+  
+      <apex:pageBlockButtons title="BUTTON" location="bottom">
+        <apex:commandButton action="{!save}" value="save" alt="vinay" />
+        <apex:commandButton action="Edit" value="Edit"/>
+        <apex:commandButton action="cancel" value="Cancel"/>
+      </apex:pageBlockButtons>
+      
+      <apex:pageBlockSection title="ACCOUNT Information" collapsible="false" columns="1">
+        <apex:pageBlockSectionItem >
+         <apex:outputLabel value="ACCOUNT NAME">
+         </apex:outputLabel>
+         <apex:inputText />
+         </apex:pageBlockSectionItem>
+         <apex:inputField value="{!Account.Type}" />
+         <apex:inputField value="{!Account.Parentid}"/>
+         <apex:inputField value="{!Account.phone}"/>
+         <apex:inputField value="{!Account.ownerShip}"/>
+         
+      </apex:pageBlockSection>
+      
+      <apex:pageBlockSection title="Address Information" columns="3">
+        <apex:inputField value="{!Account.BillingStreet}"/>
+        <apex:inputField value="{!Account.BillingCity}"/>
+        <apex:inputField value="{!Account.ShippingCity}"/>
+        <apex:pageBlockSectionItem helpText="VALID DATE" labelTitle="EXPIRY DATE" dataStyle="{color:'red';font-family:'MS Serif'}">
+        <apex:outputLabel value="SLA Expiration DATE">
+        </apex:outputLabel>
+        <apex:inputText value="{!Account.SLAExpirationDate__c}"/>
+        </apex:pageBlockSectionItem>
+      </apex:pageBlockSection>
+      
+   </apex:pageBlock> 
+ </apex:form>
+</apex:page>

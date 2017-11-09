@@ -1,0 +1,8 @@
+<apex:page controller="USER">
+<apex:form >
+<apex:outputLabel >NAME</apex:outputLabel>
+<apex:inputText value="{!pairu}"/>
+<apex:commandButton value="save" action="{!save}"/>
+ </apex:form>
+ hi!{!pairu} happ y new year
+</apex:page>

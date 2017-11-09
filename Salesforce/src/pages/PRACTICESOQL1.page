@@ -1,0 +1,21 @@
+<apex:page controller="AccountDetails">
+  <apex:form >
+   <apex:pageBlock >
+    <apex:pageBlockTable value="{!la}" var="a">
+    <apex:column value="{!a.name}"/>
+    
+    <apex:column headerValue="ContactName">
+    <apex:variable value="{!0}" var="v"/>
+     <apex:repeat value="{!a.contacts}" var="c">
+     <apex:variable value="{!v+1}" var="v"/>
+      {!v}.
+     {!c.firstname} {!c.LastName}
+     
+     <br/>
+          </apex:repeat>
+          
+    </apex:column>
+    </apex:pageBlockTable>
+   </apex:pageBlock>
+  </apex:form>
+</apex:page>
